@@ -85,5 +85,10 @@ class SanPhamController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $data = SanPham::where('ten_san_pham', 'like', '%' . $request->tenSanPham .'%')->get();
 
+        return response()->json(['dataProduct' => $data]);
+    }
 }

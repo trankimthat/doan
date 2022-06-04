@@ -39,6 +39,7 @@ Route::group(['prefix' => '/admin'], function() {
 
         Route::get('/edit/{id}', [\App\Http\Controllers\SanPhamController::class, 'editSanPham']);
         Route::post('/update', [\App\Http\Controllers\SanPhamController::class, 'updateSanPham']);
+        Route::post('/search', [\App\Http\Controllers\SanPhamController::class, 'search']);
     });
     Route::group(['prefix' => '/ban'], function() {
         Route::get('/index', [\App\Http\Controllers\BanController::class, 'index']);
@@ -63,6 +64,14 @@ Route::group(['prefix' => '/admin'], function() {
     });
     Route::group(['prefix' => '/kho'], function() {
         Route::get('/index', [\App\Http\Controllers\KhoController::class, 'index']);
+        // Route::get('/loadData', [\App\Http\Controllers\KhoHangController::class, 'loadData']);
+        // Route::get('/add/{id}', [\App\Http\Controllers\KhoHangController::class, 'store']);
+
+        // Route::get('/remove/{id}', [\App\Http\Controllers\KhoHangController::class, 'destroy']);
+        // Route::post('/update', [\App\Http\Controllers\KhoHangController::class, 'update']);
+
+        // Route::get('/create', [\App\Http\Controllers\KhoHangController::class, 'create']);
+        Route::get('/data', [\App\Http\Controllers\KhoController::class, 'data']);
     });
 });
 Route::group(['prefix' => '/user'], function() {

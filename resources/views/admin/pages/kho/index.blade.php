@@ -21,7 +21,7 @@
             <div class="card-content collapse show">
                 <div class="card-body">
                     <fieldset class="form-group position-relative">
-                        <input id="ten_san_pham" type="text" class="form-control form-control mb-1" placeholder="Nhập vào tên sản phẩm">
+                        <input id="searchSanPham" type="text" class="form-control form-control mb-1" placeholder="Nhập vào tên sản phẩm">
                         <div class="form-control-position">
                             <i id="search" class="feather icon-search info font-medium-4"></i>
                         </div>
@@ -82,161 +82,145 @@
 @endsection
 @section('js')
 <script>
-    new Vue({
-        el  :   '#app',
-        data:   {
-            danhSachSanPham     :   [],
-            danhSachKhoDangNhap :   [],
-            inputSearch         :   '',
-        },
-        created() {
-            this.loadSanPham();
-            this.loadTableBenPhai();
-        },
-        methods :   {
-            loadTableBenPhai() {
-                axios
-                    .get('/admin/nhap-kho/loadData')
-                    .then((res) => {
-                        this.danhSachKhoDangNhap = res.data.nhapKho;
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function tableBenTrai() {
+            $.ajax({
+                url     :   '/admin/kho/data',
+                type    :   'get',
+                success :   function(res) {
+                    var html = '';
+
+                    $.each(res.dulieu, function(key, value) {
+
+                        html += '<tr>';
+                        html += '<th scope="row">' + (key + 1) + '</th>';
+                        html += '<td>' + value.ten_san_pham + '</td>';
+                        html += '<td>';
+                        html += '<button data-idadd="' + value.id + '" class="btn btn-info btn-sm">Add</button>';
+                        html += '</td>';
+                        html += '</tr>';
                     });
-            },
-            loadSanPham() {
-                axios
-                    .get('/admin/san-pham/loadData')
-                    .then((res) => {
-                        this.danhSachSanPham = res.data.danhSachSanPham;
-                    });
-            },
-            addKhoHang(id) {
-                axios
-                    .get('/admin/nhap-kho/add/' + id)
-                    .then((res) => {
-                        if(res.data.status == false) {
-                            toastr.error("Sản phẩm không tồn tại!");
-                        } else {
-                            this.loadTableBenPhai();
-                        }
-                    });
-            },
-            search() {
-                var payload = {
-                    'tenSanPham'    :   this.inputSearch,
+                    $("#tableBenTrai tbody").html(html);
+
+                },
+            });
+        }
+
+        tableBenTrai();
+        $("#searchSanPham").keyup(function()
+            {
+                var search = $("#searchSanPham").val();
+                $payload = {
+                    'tenSanPham': search,
                 };
-                axios
-                    .post('/admin/san-pham/search', payload)
-                    .then((res) => {
-                        this.danhSachSanPham    = res.data.dataProduct;
+                $.ajax({
+                    url: '/admin/san-pham/search',
+                    type: 'post',
+                    data: $payload,
+                    success: function (res) {
+                        var html = '';
+
+                    $.each(res.dataProduct, function(key, value) {
+
+                        html += '<tr>';
+                        html += '<th scope="row">' + (key + 1) + '</th>';
+                        html += '<td>' + value.ten_san_pham + '</td>';
+                        html += '<td>';
+                        html += '<button data-idadd="' + value.id + '" class="btn btn-info btn-sm">Add</button>';
+                        html += '</td>';
+                        html += '</tr>';
                     });
-            },
-            destroy(id) {
-                axios
-                    .get('/admin/nhap-kho/remove/' + id)
-                    .then((res) => {
-                        if(res.data.status == false) {
-                            toastr.error("Sản phẩm không tồn tại!");
-                        } else {
-                            this.loadTableBenPhai();
-                        }
-                    });
-            },
-            update(row) {
-                axios
-                    .post('/admin/nhap-kho/update', row)
-                    .then((res) => {
-                        this.loadTableBenPhai();
-                    });
-            },
-            createStore() {
-                axios
-                    .get('/admin/nhap-kho/create')
-                    .then((res) => {
-                        toastr.success("Đã Nhập Kho Thành Công!!!");
-                        this.loadTableBenPhai();
-                    });
-            },
-        },
+                    $("#tableBenTrai tbody").html(html);
+                        // tableBenTrai();
+                        // viewSanPham(res.dataProduct);
+                    }
+
+                });
+            });
+
     });
+    // new Vue({
+    //     el  :   '#app',
+    //     data:   {
+    //         danhSachSanPham     :   [],
+    //         danhSachKhoDangNhap :   [],
+    //         inputSearch         :   '',
+    //     },
+    //     created() {
+    //         this.loadSanPham();
+    //         this.loadTableBenPhai();
+    //     },
+    //     methods :   {
+    //         loadTableBenPhai() {
+    //             axios
+    //                 .get('/admin/nhap-kho/loadData')
+    //                 .then((res) => {
+    //                     this.danhSachKhoDangNhap = res.data.nhapKho;
+    //                 });
+    //         },
+    //         loadSanPham() {
+    //             axios
+    //                 .get('/admin/san-pham/loadData')
+    //                 .then((res) => {
+    //                     this.danhSachSanPham = res.data.danhSachSanPham;
+    //                 });
+    //         },
+    //         addKhoHang(id) {
+    //             axios
+    //                 .get('/admin/nhap-kho/add/' + id)
+    //                 .then((res) => {
+    //                     if(res.data.status == false) {
+    //                         toastr.error("Sản phẩm không tồn tại!");
+    //                     } else {
+    //                         this.loadTableBenPhai();
+    //                     }
+    //                 });
+    //         },
+    //         search() {
+    //             var payload = {
+    //                 'tenSanPham'    :   this.inputSearch,
+    //             };
+    //             axios
+    //                 .post('/admin/san-pham/search', payload)
+    //                 .then((res) => {
+    //                     this.danhSachSanPham    = res.data.dataProduct;
+    //                 });
+    //         },
+    //         destroy(id) {
+    //             axios
+    //                 .get('/admin/nhap-kho/remove/' + id)
+    //                 .then((res) => {
+    //                     if(res.data.status == false) {
+    //                         toastr.error("Sản phẩm không tồn tại!");
+    //                     } else {
+    //                         this.loadTableBenPhai();
+    //                     }
+    //                 });
+    //         },
+    //         update(row) {
+    //             axios
+    //                 .post('/admin/nhap-kho/update', row)
+    //                 .then((res) => {
+    //                     this.loadTableBenPhai();
+    //                 });
+    //         },
+    //         createStore() {
+    //             axios
+    //                 .get('/admin/nhap-kho/create')
+    //                 .then((res) => {
+    //                     toastr.success("Đã Nhập Kho Thành Công!!!");
+    //                     this.loadTableBenPhai();
+    //                 });
+    //         },
+    //     },
+    // });
 </script>
 @endsection
 
-{{-- $.ajax({
-    url     :   '/admin/nhap-kho/data',
-    type    :   'get',
-    success :   function(res) {
-        var content = '';
-        var tongTien = 0;
-        var tongSanPham = 0;
-        $.each(res.data, function(key, value) {
-            content+= '<tr class="align-middle">';
-            content+= '<th class="text-center">'+(key+1)+'</th>';
-            content+= '<td>'+value.ma_san_pham+'</td>';
-            content+= '<td>'+value.ten_san_pham+'</td>';
-            content+= '<td>';
-            content+= '<input type="number" min=1 class="form-control qty" value="'+value.so_luong_nhap+'" data-id='+ value.id+'>';
-            content+= '</td>';
-            content+= '<td>';
-            content+= '<input type="number" class="form-control price" value="'+value.don_gia_nhap +'" data-id='+ value.id+'>';
-            content+= '</td>';
-            content+= '<td>'+formatNumber(value.so_luong_nhap * value.don_gia_nhap) +'</td>';
-            content+= '<td class="text-center">';
-            content+= '<button class="btn btn-danger delete" data-id='+ value.id+'>Xóa</button>';
-            content+= '</td>';
-            content+= '</tr>';
-            tongTien    = tongTien + value.so_luong_nhap * value.don_gia_nhap;
-            tongSanPham = tongSanPham + value.so_luong_nhap;
-        });
-        $("#listNhapKho tbody").html(content);
-        $("#tongTien").text(formatNumber(tongTien) + ' (' + toVietNam(tongTien) + ')');
-        $("#tongSanPham").text(tongSanPham);
-    },
-}); --}}
 
-{{-- $.ajax({
-    url     :   '/admin/nhap-kho/update',
-    type    :   'post',
-    data    :   payload,
-    success :   function(res) {
-        if(res.status == false) {
-            toastr.error(res.message);
-            loadNhapKho();
-        } else {
-            toastr.success("Đã cập nhật số lượng sản phẩm!");
-            loadNhapKho();
-        }
-    },
-    error   :   function(res) {
-        var listError = res.responseJSON.errors;
-        $.each(listError, function(key, value) {
-            toastr.error(value[0]);
-        });
-    },
-});
-});
-
-$("body").on('change', '.price', function(){
-var payload = {
-    'id'            :   $(this).data('id'),
-    'don_gia_nhap'  :   $(this).val(),
-};
-
-$.ajax({
-    url     :   '/admin/nhap-kho/updatePrice',
-    type    :   'post',
-    data    :   payload,
-    success :   function(res) {
-        if(res.status == false) {
-            toastr.error(res.message);
-            loadNhapKho();
-        } else {
-            toastr.success("Đã cập nhật đơn giá sản phẩm!");
-            loadNhapKho();
-        }
-    },
-    error   :   function(res) {
-        var listError = res.responseJSON.errors;
-        $.each(listError, function(key, value) {
-            toastr.error(value[0]);
-        });
-    }, --}}
 
