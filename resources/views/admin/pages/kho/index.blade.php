@@ -57,6 +57,11 @@
                 </div>
             </div>
             <div class="card-content collapse show">
+                {{-- <div class="card-header">
+                    <h5>Chi Tiết Hóa Đơn Nhập Hàng</h5>
+                    <span>Tổng tiền hàng: <span id="tongTien" class="text-danger font-weight-bold"></span></span>
+                    <span>Tổng số sản phẩm: <span id="tongSanPham" class="text-danger font-weight-bold"></span></span>
+                </div> --}}
                 <div class="card-body">
                     <table class="table table-bordered mb-0" id="tableBenPhai">
                         <thead>
@@ -171,6 +176,7 @@
                 success :   function(res) {
                     var html = '';
                     var tongTien = 0;
+                    var tongSanPham = 0;
 
                     $.each(res.nhapKho, function(key, value) {
 
@@ -189,11 +195,12 @@
                         html += '<button class="btn btn-danger delete mr-1" data-iddelete="'+ value.id +'" data-toggle="modal" data-target="#deleteModal">Delete</button>';
                         html += '</td>';
                         html += '</tr>';
-                        tongTien = tongTien + value.so_luong * value.don_gia;
+                        // tongTien = tongTien + value.so_luong * value.don_gia;
+                        // tongSanPham = tongSanPham + value.so_luong;
                     });
                     $("#tableBenPhai tbody").html(html);
-                    $("#tongTien").text(formatNumber(tongTien) + ' (' + toVietNam(tongTien) + ')');
-
+                    // $("#tongTien").html(tongTien);
+                    // $("#tongSanPham").html(tongSanPham);
                 },
             });
         }
