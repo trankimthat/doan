@@ -15,13 +15,12 @@ class CreateKhosTable extends Migration
     {
         Schema::create('khos', function (Blueprint $table) {
             $table->id();
-            $table->string('id_san_pham');
-            $table->string('ten_san_pham');
+            $table->string('id_danh_muc');
+            $table->string('ten_danh_muc');
             $table->integer('so_luong');
             $table->integer('don_gia')->nullable();
             $table->integer('thanh_tien')->nullable();
             $table->integer('type')->default(0);
-            $table->string('hash')->nullable();
             $table->timestamps();
         });
     }

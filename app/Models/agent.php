@@ -20,6 +20,5 @@ class agent extends Authenticatable
         'password',
         'dia_chi',
         'is_open',
-        'hash',
     ];
 }

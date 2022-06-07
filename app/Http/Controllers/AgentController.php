@@ -123,7 +123,7 @@ class AgentController extends Controller
 
 
         $data = $request->all();
-        $data['hash']       = Str::uuid();
+        // $data['hash']       = Str::uuid();
         $data['ho_lot']     = $firstname;
         $data['ten']        = $lastname;
         $data['password']   = bcrypt($request->password);

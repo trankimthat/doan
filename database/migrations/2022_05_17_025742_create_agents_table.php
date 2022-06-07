@@ -23,7 +23,6 @@ class CreateAgentsTable extends Migration
             $table->string('password');
             $table->string('dia_chi');
             $table->integer('is_open')->default(1);
-            $table->string('hash');
             $table->timestamps();
         });
     }

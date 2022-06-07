@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Kho extends Model
 {
     use HasFactory;
-    protected $table = 'kho_hangs';
+    protected $table = 'khos';
 
     protected $fillable = [
-        'id_san_pham',
-        'ten_san_pham',
+        'id_danh_muc',
+        'ten_danh_muc',
         'so_luong',
         'don_gia',
         'thanh_tien',
         'type',
-        'hash',
+
     ];
 }

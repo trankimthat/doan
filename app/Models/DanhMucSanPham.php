@@ -13,6 +13,7 @@ class DanhMucSanPham extends Model
     protected $fillable = [
         'ten_danh_muc',
         'slug_danh_muc',
+        'so_luong',
         'hinh_anh',
         'id_danh_muc_cha',
         'is_delete',

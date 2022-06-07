@@ -26,7 +26,7 @@ class SanPhamController extends Controller
         return response()->json(['thongBao' => 1235]);
     }
 
-    public function TraChoMotDoanJsonDanhSachSanPham()
+    public function getData()
     {
         $data = SanPham::join('danh_muc_san_phams', 'san_phams.id_danh_muc', 'danh_muc_san_phams.id')
                         ->select('san_phams.*', 'danh_muc_san_phams.ten_danh_muc')
@@ -84,11 +84,11 @@ class SanPhamController extends Controller
             'status' => true,
         ]);
     }
+    // public function search(Request $request)
+    // {
+    //     $data = SanPham::where('ten_san_pham', 'like', '%' . $request->tenSanPham .'%')->get();
+    //     // dd($data);
+    //     return response()->json(['dataProduct' => $data]);
 
-    public function search(Request $request)
-    {
-        $data = SanPham::where('ten_san_pham', 'like', '%' . $request->tenSanPham .'%')->get();
-
-        return response()->json(['dataProduct' => $data]);
-    }
+    // }
 }

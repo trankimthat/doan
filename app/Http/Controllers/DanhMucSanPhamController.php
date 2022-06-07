@@ -97,5 +97,12 @@ class DanhMucSanPhamController extends Controller
 
         return response()->json(['status'=> true]);
     }
+    public function search(Request $request)
+    {
+        $data = DanhMucSanPham::where('ten_danh_muc', 'like', '%' . $request->tenDanhMuc .'%') ->get();
+        // dd($data);
+        return response()->json(['dataProduct' => $data]);
+
+    }
 
 }
