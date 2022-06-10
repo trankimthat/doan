@@ -247,7 +247,7 @@
                 data    :   payload,
                 success :   function(res) {
                     if(res.status == false) {
-                        toastr.error(res.message);
+                        toastr.error('Cập nhật thất bại số lượng lớn hơn 1');
                         tableBenPhai();
                     } else {
                         toastr.success("Đã cập nhật số lượng sản phẩm!");
@@ -274,7 +274,7 @@
                 data    :   payload,
                 success :   function(res) {
                     if(res.status == false) {
-                        toastr.error(res.message);
+                        toastr.error("Cập nhật thất bại đơn giá lớn hơn 1");
                         tableBenPhai();
                     } else {
                         toastr.success("Đã cập nhật đơn giá sản phẩm!");

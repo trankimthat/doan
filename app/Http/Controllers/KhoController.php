@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DeleteChiTietNhapKhoRequest;
+use App\Http\Requests\KhoRequest;
 use App\Models\DanhMucSanPham;
 use App\Models\Kho;
 use App\Models\SanPham;
@@ -47,6 +48,7 @@ class KhoController extends Controller
     public function getData()
     {
         $data = Kho::join('danh_muc_san_phams','khos.id_danh_muc', 'danh_muc_san_phams.id')
+                
                               ->select('khos.*', 'danh_muc_san_phams.ten_danh_muc')
                               ->get();
         return response()->json([
@@ -79,14 +81,19 @@ class KhoController extends Controller
 
     public function updateqty(Request $request)
     {
+        // $request = $request->all();
         // $request->id, $request->so_luong, $request->don_gia
         $khoHang = Kho::where('id', $request->id)->where('type', 0)->first();
 
         if($khoHang) {
             $khoHang->so_luong = $request->so_luong;
-            $khoHang->save();
+            if($khoHang->so_luong > 0){
+                $khoHang->save();
+                return response()->json(['status' => true]);
+            }else{
+                return response()->json(['status' => false]);
+            }
 
-            return response()->json(['status' => true]);
         } else {
             return response()->json(['status' => false]);
         }
@@ -98,9 +105,14 @@ class KhoController extends Controller
 
         if($khoHang) {
             $khoHang->don_gia = $request->don_gia;
-            $khoHang->save();
+            if($khoHang->don_gia > 0){
+                $khoHang->save();
+                return response()->json(['status' => true]);
+            }else{
+                return response()->json(['status' => false]);
 
-            return response()->json(['status' => true]);
+            }
+
         } else {
             return response()->json(['status' => false]);
         }

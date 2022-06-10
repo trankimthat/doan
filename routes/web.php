@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.master');
-});
+Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);
 Route::group(['prefix' => '/admin'], function() {
+    Route::get('/index', [\App\Http\Controllers\AdminController::class, 'index']);
     Route::group(['prefix' => '/danh-muc-san-pham'], function() {
         Route::get('/index', [\App\Http\Controllers\DanhMucSanPhamController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\DanhMucSanPhamController::class, 'store']);
