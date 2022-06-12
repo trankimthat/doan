@@ -17,6 +17,6 @@ class ChiTietHoaDon extends Model
         'don_gia',
         'is_cart',
         'hoa_don_id',
-        'user_id',
+        'agent_id',
     ];
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ban;
+use App\Models\ChiTietHoaDon;
 use App\Models\HoaDon;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class HoaDonController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.hoa_don.index');
     }
 
     /**
@@ -22,9 +24,12 @@ class HoaDonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getData()
     {
-        //
+        $data = ChiTietHoaDon::all();
+        return response()->json([
+            'dulieu' => $data,
+        ]);
     }
 
     /**

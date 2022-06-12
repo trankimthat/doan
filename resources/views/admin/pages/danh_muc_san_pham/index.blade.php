@@ -25,14 +25,7 @@
                         <label>Slug Danh Mục</label>
                         <input id="slug_danh_muc" name="slug_danh_muc" placeholder="Nhập vào slug danh mục" type="text" class="form-control">
                     </div>
-                    <div class="position-relative form-group">
-                        <label>Hình Ảnh</label>
-                        <div class="input-group">
-                            <input id="hinh_anh" name="hinh_anh" class="form-control" type="text">
-                            <input type="button" class="btn-info lfm" data-input="hinh_anh" data-preview="holder" value="Upload">
-                        </div>
-                        <img id="holder" style="margin-top:15px;max-height:100px;">
-                    </div>
+
                     <div class="position-relative form-group">
                         <label>Danh Mục Cha</label>
                         <select id="id_danh_muc_cha" name="id_danh_muc_cha" class="form-control">
@@ -116,14 +109,7 @@
                 <label>Slug Danh Mục</label>
                 <input id="slug_danh_muc_edit" placeholder="Nhập vào slug danh mục" type="text" class="form-control">
             </div>
-            <div class="position-relative form-group">
-                <label>Hình Ảnh</label>
-                <div class="input-group">
-                    <input id="hinh_anh_edit" class="form-control" type="text">
-                    <input type="button" class="btn-info lfm" data-input="hinh_anh_edit" data-preview="holder_edit" value="Upload">
-                </div>
-                <img id="holder_edit" style="margin-top:15px;max-height:100px;">
-            </div>
+
             <div class="position-relative form-group">
                 <label>Danh Mục Cha</label>
                 <select id="id_danh_muc_cha_edit"class="form-control">
@@ -240,14 +226,14 @@
             e.preventDefault();
             var val_ten_danh_muc    = $("#ten_danh_muc").val();
             var val_slug_danh_muc   = $("#slug_danh_muc").val();
-            var val_hinh_anh        = $("#hinh_anh").val();
+
             var val_id_danh_muc_cha = $("#id_danh_muc_cha").val();
             var val_is_open         = $("#is_open").val();
 
             var payload = {
                 'ten_danh_muc'      :   val_ten_danh_muc,
                 'slug_danh_muc'     :   val_slug_danh_muc,
-                'hinh_anh'          :   val_hinh_anh,
+
                 'id_danh_muc_cha'   :   val_id_danh_muc_cha,
                 'is_open'           :   val_is_open,
             };
@@ -330,8 +316,6 @@
                     if(res.status) {
                         $("#ten_danh_muc_edit").val(res.data.ten_danh_muc);
                         $("#slug_danh_muc_edit").val(res.data.slug_danh_muc);
-                        $("#hinh_anh_edit").val(res.data.hinh_anh);
-                        $("#holder_edit").attr("src", res.data.hinh_anh);
                         $("#id_danh_muc_cha_edit").val(res.data.id_danh_muc_cha);
                         $("#is_open_edit").val(res.data.is_open);
                         $("#id_edit").val(res.data.id);
@@ -348,7 +332,7 @@
         $("#accpectUpdate").click(function(){
             var val_ten_danh_muc    = $("#ten_danh_muc_edit").val();
             var val_slug_danh_muc   = $("#slug_danh_muc_edit").val();
-            var val_hinh_anh        = $("#hinh_anh_edit").val();
+
             var val_id_danh_muc_cha = $("#id_danh_muc_cha_edit").val();
             var val_is_open         = $("#is_open_edit").val();
             var val_id              = $("#id_edit").val();
@@ -356,7 +340,7 @@
             var payload = {
                 'ten_danh_muc'      :   val_ten_danh_muc,
                 'slug_danh_muc'     :   val_slug_danh_muc,
-                'hinh_anh'          :   val_hinh_anh,
+
                 'id_danh_muc_cha'   :   val_id_danh_muc_cha,
                 'is_open'           :   val_is_open,
                 'id'                :   val_id,

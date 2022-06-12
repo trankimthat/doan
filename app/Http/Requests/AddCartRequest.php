@@ -13,7 +13,7 @@ class AddCartRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,25 @@ class AddCartRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'san_pham_id'       =>  'required|exists:san_phams,id',
+            'so_luong'          =>  'required|numeric|min:1',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'required'     => ':attribute không được để trống',
+            'exists'       => ':attribute không tồn tại' ,
+            'numeric'      => ':attribute phải dạng số',
+            'min'          => ':attribute lớn hơn 1 ' ,
+        ];
+
+    }
+    public function attributes()
+    {
+        return [
+            'san_pham_id'       =>  'sản phẩm',
+            'so_luong'          =>  'số lượng',
         ];
     }
 }

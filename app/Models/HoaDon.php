@@ -15,7 +15,7 @@ class HoaDon extends Model
         'tong_tien',
         'tien_giam_gia',
         'thuc_tra',
-        'user_id',
+        'agent_id',
         'loai_thanh_toan',
     ];
 }

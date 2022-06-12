@@ -20,8 +20,6 @@ class CreateSanPhamsTable extends Migration
             $table->integer('gia_ban');
             $table->integer('gia_khuyen_mai');
             $table->string('anh_dai_dien');
-            $table->longText('mo_ta_ngan');
-            $table->longText('mo_ta_chi_tiet');
             $table->integer('id_danh_muc');
             $table->integer('is_open')->default(1);
             $table->timestamps();

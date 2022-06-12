@@ -85,7 +85,7 @@
                                     </fieldset>
                                 </div>
                             </div>
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-12">
                                     <fieldset class="form-group">
                                         <label for="placeTextarea">Mô Tả Ngắn</label>
@@ -96,7 +96,7 @@
                             <div class="position-relative form-group">
                                 <label>Mô Tả Chi Tiết</label>
                                 <input name="mo_ta_chi_tiet_edit" id="mo_ta_chi_tiet_edit" placeholder="Nhập vào mô tả chi tiết" type="text" class="form-control">
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-6">
                                     <fieldset class="form-group">
@@ -174,14 +174,14 @@
                         </div>
                     </div>
 
-                    <div class="position-relative form-group">
+                    {{-- <div class="position-relative form-group">
                         <label>Mô Tả Ngắn</label>
                         <textarea class="form-control" id="mo_ta_ngan" cols="30" rows="5" placeholder="Nhập vào mô tả ngắn"></textarea>
                     </div>
                     <div class="position-relative form-group">
                         <label>Mô Tả Chi Tiết</label>
                         <input name="mo_ta_chi_tiet" id="mo_ta_chi_tiet" placeholder="Nhập vào mô tả chi tiết" type="text" class="form-control">
-                    </div>
+                    </div> --}}
 
                     <div class="row">
                         <div class="col-md-6">
@@ -328,8 +328,8 @@
             var gia_ban             = $("#gia_ban").val();
             var gia_khuyen_mai      = $("#gia_khuyen_mai").val();
             var anh_dai_dien        = $("#anh_dai_dien").val();
-            var mo_ta_ngan          = $("#mo_ta_ngan").val();
-            var mo_ta_chi_tiet      = CKEDITOR.instances['mo_ta_chi_tiet'].getData();
+            // var mo_ta_ngan          = $("#mo_ta_ngan").val();
+            // var mo_ta_chi_tiet      = CKEDITOR.instances['mo_ta_chi_tiet'].getData();
             var id_danh_muc         = $("#id_danh_muc").val();
             var is_open             = $("#is_open").val();
 
@@ -339,8 +339,8 @@
                 'gia_ban'               :   gia_ban,
                 'gia_khuyen_mai'        :   gia_khuyen_mai,
                 'anh_dai_dien'          :   anh_dai_dien,
-                'mo_ta_ngan'            :   mo_ta_ngan,
-                'mo_ta_chi_tiet'        :   mo_ta_chi_tiet,
+                // 'mo_ta_ngan'            :   mo_ta_ngan,
+                // 'mo_ta_chi_tiet'        :   mo_ta_chi_tiet,
                 'id_danh_muc'           :   id_danh_muc,
                 'is_open'               :   is_open,
             };
@@ -356,7 +356,7 @@
                     if(res.thongBao == 1235) {
                         layDuLieu();
                         $('#formCreate').trigger("reset");
-                        CKEDITOR.instances.mo_ta_chi_tiet.setData('');
+                        // CKEDITOR.instances.mo_ta_chi_tiet.setData('');
                         $('#holder').attr('src', '');
                         toastr.success('Thêm mới sản phẩm thành công!');
                     }
@@ -420,9 +420,9 @@
                         $("#gia_khuyen_mai_edit").val(res.data.gia_khuyen_mai);
                         $("#anh_dai_dien_edit").val(res.data.anh_dai_dien);
                         $("#holder_edit").attr("src", res.data.anh_dai_dien);
-                        $("#mo_ta_ngan_edit").val(res.data.mo_ta_ngan);
+                        // $("#mo_ta_ngan_edit").val(res.data.mo_ta_ngan);
                         $("#id_edit").val(res.data.id);
-                        CKEDITOR.instances['mo_ta_chi_tiet_edit'].setData(res.data.mo_ta_chi_tiet);
+                        // CKEDITOR.instances['mo_ta_chi_tiet_edit'].setData(res.data.mo_ta_chi_tiet);
                         $("#id_danh_muc_edit").val(res.data.id_danh_muc);
                         $("#is_open_edit").val(res.data.is_open);
                     } else {
@@ -441,9 +441,9 @@
             var val_gia_ban             = $("#gia_ban_edit").val();
             var val_gia_khuyen_mai      = $("#gia_khuyen_mai_edit").val();
             var val_anh_dai_dien        = $("#anh_dai_dien_edit").val();
-            var val_mo_ta_ngan          = $("#mo_ta_ngan_edit").val();
-            var val_mo_ta_chi_tiet      = $("#mo_ta_ngan_edit").val();
-            var val_mo_ta_chi_tiet      = CKEDITOR.instances['mo_ta_chi_tiet_edit'].getData();
+            // var val_mo_ta_ngan          = $("#mo_ta_ngan_edit").val();
+            // var val_mo_ta_chi_tiet      = $("#mo_ta_ngan_edit").val();
+            // var val_mo_ta_chi_tiet      = CKEDITOR.instances['mo_ta_chi_tiet_edit'].getData();
             var val_id_danh_muc         = $("#id_danh_muc_edit").val();
             var val_is_open             = $("#is_open_edit").val();
             var val_id                  = $("#id_edit").val();
@@ -454,8 +454,8 @@
                 'gia_ban'           :   val_gia_ban,
                 'gia_khuyen_mai'    :   val_gia_khuyen_mai,
                 'anh_dai_dien'      :   val_anh_dai_dien,
-                'mo_ta_ngan'        :   val_mo_ta_ngan,
-                'mo_ta_chi_tiet'    :   val_mo_ta_chi_tiet,
+                // 'mo_ta_ngan'        :   val_mo_ta_ngan,
+                // 'mo_ta_chi_tiet'    :   val_mo_ta_chi_tiet,
                 'id_danh_muc'       :   val_id_danh_muc,
                 'is_open'           :   val_is_open,
                 'id'                :   val_id,

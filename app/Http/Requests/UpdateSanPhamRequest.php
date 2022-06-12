@@ -30,8 +30,7 @@ class UpdateSanPhamRequest extends FormRequest
             'gia_ban'           =>  'nullable|numeric',
             'gia_khuyen_mai'    =>  'required|numeric|lt:gia_ban',
             'anh_dai_dien'      =>  'required',
-            'mo_ta_ngan'        =>  'required|max:500',
-            'mo_ta_chi_tiet'    =>  'required',
+
             'id_danh_muc'       =>  'required|exists:danh_muc_san_phams,id',
             'is_open'           =>  'required|boolean',
         ];
@@ -59,8 +58,6 @@ class UpdateSanPhamRequest extends FormRequest
             'gia_ban'           =>  'Giá bán',
             'gia_khuyen_mai'    =>  'Giá khuyến mãi',
             'anh_dai_dien'      =>  'Ảnh đại diện',
-            'mo_ta_ngan'        =>  'Mô tả ngắn',
-            'mo_ta_chi_tiet'    =>  'Mô tả chi tiết',
             'id_danh_muc'       =>  'Danh mục',
             'is_open'           =>  'Tình trạng',
         ];

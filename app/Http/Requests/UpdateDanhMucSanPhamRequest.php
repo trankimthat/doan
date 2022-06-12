@@ -26,7 +26,7 @@ class UpdateDanhMucSanPhamRequest extends FormRequest
         return [
             'ten_danh_muc'      =>  'required|max:50|unique:danh_muc_san_phams,ten_danh_muc,'.$this->id,
             'slug_danh_muc'     =>  'required|max:50|unique:danh_muc_san_phams,slug_danh_muc,'.$this->id,
-            'hinh_anh'          =>  'required',
+
             'id_danh_muc_cha'   =>  'nullable|exists:danh_muc_san_phams,id',
             'is_open'           =>  'required|boolean',
             'id'                =>  'required|exists:danh_muc_san_phams,id',
@@ -49,7 +49,7 @@ class UpdateDanhMucSanPhamRequest extends FormRequest
             'id'                =>  'Danh mục sản phẩm',
             'ten_danh_muc'      =>  'Tên danh mục',
             'slug_danh_muc'     =>  'Slug danh mục',
-            'hinh_anh'          =>  'Hình ảnh',
+
             'id_danh_muc_cha'   =>  'Danh mục cha',
             'is_open'           =>  'Tình trạng',
         ];

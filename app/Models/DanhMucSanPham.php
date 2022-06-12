@@ -14,7 +14,6 @@ class DanhMucSanPham extends Model
         'ten_danh_muc',
         'slug_danh_muc',
         'so_luong',
-        'hinh_anh',
         'id_danh_muc_cha',
         'is_delete',
         'is_open',

@@ -68,4 +68,18 @@ class BanController extends Controller
             ]);
         }
     }
+    public function ban($id)
+    {
+        $ban = Ban::find($id);
+        if($ban) {
+            return response()->json([
+                'status'  =>  true,
+                'data'    =>  $ban,
+            ]);
+        } else {
+            return response()->json([
+                'status'  =>  false,
+            ]);
+        }
+    }
 }

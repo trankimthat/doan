@@ -16,7 +16,7 @@ class CreateBansTable extends Migration
         Schema::create('bans', function (Blueprint $table) {
             $table->id();
             $table->string('ma_ban');
-            $table->integer('id_don_hang')->nullable();
+            $table->integer('id_hoa_don')->nullable();
             $table->integer('is_open')->default(1);
             $table->timestamps();
         });

@@ -142,7 +142,9 @@ class AgentController extends Controller
             // Đã login thành công!!!
             $agent = Auth::guard('agent')->user();
             if($agent->is_open == 1) {
+
                 return response()->json(['status' => 2]);
+
                 // dd(2);
             } else {
                 return response()->json(['status' => 1]);
@@ -152,5 +154,9 @@ class AgentController extends Controller
             //Login thất bại
             return response()->json(['status' => 0]);
         }
+    }
+    public function logout(){
+        Auth::guard("agent")->logout();
+        return redirect("/");
     }
 }

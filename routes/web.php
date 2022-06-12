@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);
+Route::get('/home-page', [\App\Http\Controllers\HomePageController::class, 'index']);
 Route::group(['prefix' => '/admin'], function() {
     Route::get('/index', [\App\Http\Controllers\AdminController::class, 'index']);
     Route::group(['prefix' => '/danh-muc-san-pham'], function() {
@@ -74,8 +74,21 @@ Route::group(['prefix' => '/admin'], function() {
         Route::get('/createnhapkho', [\App\Http\Controllers\KhoController::class, 'create']);
 
     });
+    Route::group(['prefix' => '/hoa-don'], function() {
+        Route::get('/index', [\App\Http\Controllers\HoaDonController::class, 'index']);
+        Route::get('/data', [\App\Http\Controllers\HoaDonController::class, 'getData']);
+    });
 });
-Route::group(['prefix' => '/user'], function() {
-        Route::get('/login', [\App\Http\Controllers\AgentController::class, 'login']);
+
+        Route::get('/', [\App\Http\Controllers\AgentController::class, 'login']);
         Route::post('/login', [\App\Http\Controllers\AgentController::class, 'loginAction']);
+        Route::get('/logout', [\App\Http\Controllers\AgentController::class, 'logout']);
+        Route::group(['prefix' => '/user'], function() {
+        // Route::get('/oder/index', [\App\Http\Controllers\DonHangController::class, 'index']);
+        Route::get('/ban/index', [\App\Http\Controllers\BanUserController::class, 'index']);
+        Route::get('/data', [\App\Http\Controllers\BanUserController::class, 'getData']);
+        Route::get('/ban/{id}', [\App\Http\Controllers\BanController::class, 'ban']);
+        Route::get('/cart', [\App\Http\Controllers\ChiTietHoaDonController::class, 'index']);
+        Route::get('/cart/data', [\App\Http\Controllers\ChiTietHoaDonController::class, 'dataCart']);
+        Route::post('/add-to-cart', [\App\Http\Controllers\ChiTietHoaDonController::class, 'addToCart']);
 });

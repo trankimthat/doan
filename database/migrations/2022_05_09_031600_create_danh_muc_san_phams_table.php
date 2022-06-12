@@ -18,7 +18,6 @@ class CreateDanhMucSanPhamsTable extends Migration
             $table->string('ten_danh_muc');
             $table->string('slug_danh_muc');
             $table->integer('so_luong')->default(0);
-            $table->string('hinh_anh');
             $table->integer('id_danh_muc_cha')->nullable();
             $table->integer('is_delete')->default(0);
             $table->integer('is_open');
