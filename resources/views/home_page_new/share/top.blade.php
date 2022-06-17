@@ -54,11 +54,11 @@
 
                     </small>
 
-                <a style="font-size: 50px" class="btn-sm-square bg-white rounded-circle ms-3" href="">
+                <button style="font-size: 50px" class="btn-sm-square bg-white rounded-circle ms-3 cart" data-idcart="id" >
                     <small class="fa fa-shopping-bag text-body"></small>
-
-                </a>
+                </button>
             </div>
         </div>
     </nav>
 </div>
+

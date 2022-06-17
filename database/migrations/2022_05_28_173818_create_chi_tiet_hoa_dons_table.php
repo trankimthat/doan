@@ -20,6 +20,7 @@ class CreateChiTietHoaDonsTable extends Migration
             $table->integer('so_luong')->default(1);
             $table->double('don_gia', 18, 0);
             $table->integer('is_cart')->default(1);
+            $table->integer('id_ban');
             $table->integer('hoa_don_id')->nullable();
             $table->integer('agent_id');
             $table->timestamps();

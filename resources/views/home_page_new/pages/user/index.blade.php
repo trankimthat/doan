@@ -45,9 +45,12 @@
                                             {{-- <small class="w-50 text-center border-end py-2">
                                                 <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>Od</a>
                                             </small> --}}
+                                            {{-- @foreach ( $allBan as $key_ban=>$value_ban ) --}}
                                             <small class="w-50 text-center py-2" style="margin-left: 73px">
-                                                <a  title="Add to Cart"  class="addToCart" style="font-size: 1.875em" data-id="{{ $value_sp->id }}"  >ODER</a>
+                                                <a   title="Add to Cart"  class="btn addToCart" style="font-size: 1.875em"  data-id="{{ $value_sp->id }} ">ODER</a>
                                             </small>
+                                            {{-- @endforeach --}}
+
                                         </div>
                                     </div>
                                 </div>
@@ -62,4 +65,5 @@
     </div>
 </div>
 @endsection
+
 

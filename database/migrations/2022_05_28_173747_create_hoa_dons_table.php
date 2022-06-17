@@ -20,6 +20,7 @@ class CreateHoaDonsTable extends Migration
             $table->double('tien_giam_gia', 18, 0);
             $table->double('thuc_tra', 18, 0);
             $table->integer('agent_id');
+            $table->integer('id_ban');
             $table->integer('loai_thanh_toan');
             $table->timestamps();
         });

@@ -16,6 +16,7 @@ class ChiTietHoaDon extends Model
         'so_luong',
         'don_gia',
         'is_cart',
+        'id_ban',
         'hoa_don_id',
         'agent_id',
     ];

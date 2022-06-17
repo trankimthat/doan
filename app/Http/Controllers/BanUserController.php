@@ -26,4 +26,34 @@ class BanUserController extends Controller
             'dulieu' => $data,
         ]);
     }
+    public function ban($id)
+    {
+        $ban = Ban::find($id);
+        if($ban) {
+            return response()->json([
+                'status'  =>  true,
+                'data'    =>  $ban,
+            ]);
+        } else {
+            return response()->json([
+                'status'  =>  false,
+            ]);
+        }
+    }
+    public function doiTrangThai($id)
+    {
+        $ban = Ban::find($id);
+        if($ban) {
+            $ban->is_open = !$ban->is_open;
+            $ban->save();
+            return response()->json([
+                'trangThai'         =>  true,
+                'tinhTrangBan'      =>  $ban->is_open,
+            ]);
+        } else {
+            return response()->json([
+                'trangThai'         =>  false,
+            ]);
+        }
+    }
 }

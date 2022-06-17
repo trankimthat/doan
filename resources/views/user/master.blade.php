@@ -15,6 +15,15 @@ License: You must have a valid license purchased only from themeforest(the above
   <!-- BEGIN: Head-->
   <head>
     @include('user.shares.head')
+    <style>
+        button.doiTrangThai.btn.btn-primary {
+        margin-left: 110px;
+        }
+        button.doiTrangThai.btn.btn-danger {
+        margin-left: 110px;
+        }
+
+    </style>
   </head>
   <!-- END: Head-->
 

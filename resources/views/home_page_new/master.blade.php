@@ -30,6 +30,8 @@
     <!-- Template Stylesheet -->
     <link href="/home_assets/app_assets/css/style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
+    @toastr_css
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         .dropdown-item:hover{
          color: red;
@@ -117,21 +119,30 @@
 
 
     <!-- JavaScript Libraries -->
+    @jquery
+    @toastr_js
+    @toastr_render
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/home_assets/app_assets/lib/wow/wow.min.js"></script>
     <script src="/home_assets/app_assets/lib/easing/easing.min.js"></script>
     <script src="/home_assets/app_assets/lib/waypoints/waypoints.min.js"></script>
     <script src="/home_assets/app_assets/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/assets_admin/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="/home_assets/app_assets/js/main.js"></script>
     @yield('js')
     <script>
         $('.addToCart').click(function(){
-            var san_pham_id = $(this).data('id');
+            var id_san_pham = $(this).data('id');
+            var url = window.location.pathname;
+            var id_ban = url.substr(11);
+            // console.log(id_ban);
                 var payload = {
-                    'san_pham_id'   : san_pham_id,
+                    'san_pham_id'   : id_san_pham,
+                    'id_ban'        : id_ban,
                     'so_luong'      : 1,
                 };
                 axios
@@ -140,7 +151,7 @@
                          if(res.data.status) {
                             toastr.success("Đã thêm vào giỏ hàng!");
                         } else {
-                            toastr.error("Bạn cần đăng nhập trước!");
+                            toastr.error("Bạn thêm vào giỏ thất bại !");
                         }
                     })
                     .catch((res) => {
@@ -149,6 +160,18 @@
                             toastr.error(value[0]);
                         });
                     });
+                    $('.cart').click(function{
+                    var url = window.location.pathname;
+                    var id_ban = url.substr(11);
+                    console.log(id_ban);
+                    $.ajax({
+                    url     :'/user/cart/'+ id_ban,
+                    type    : 'get',
+                    success : function(res) {
+                            toastr.success("Các món đã oder!");
+                    },
+                });
+            });
         });
     </script>
 </body>

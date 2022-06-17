@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home-page', [\App\Http\Controllers\HomePageController::class, 'index']);
+Route::get('/home-page/{id}', [\App\Http\Controllers\HomePageController::class, 'index']);
+//  Route::get('/home-page/{id}', [\App\Http\Controllers\HomePageController::class, 'index']);
+
 Route::group(['prefix' => '/admin'], function() {
     Route::get('/index', [\App\Http\Controllers\AdminController::class, 'index']);
     Route::group(['prefix' => '/danh-muc-san-pham'], function() {
@@ -77,18 +79,24 @@ Route::group(['prefix' => '/admin'], function() {
     Route::group(['prefix' => '/hoa-don'], function() {
         Route::get('/index', [\App\Http\Controllers\HoaDonController::class, 'index']);
         Route::get('/data', [\App\Http\Controllers\HoaDonController::class, 'getData']);
+
     });
 });
 
         Route::get('/', [\App\Http\Controllers\AgentController::class, 'login']);
         Route::post('/login', [\App\Http\Controllers\AgentController::class, 'loginAction']);
         Route::get('/logout', [\App\Http\Controllers\AgentController::class, 'logout']);
+
         Route::group(['prefix' => '/user'], function() {
         // Route::get('/oder/index', [\App\Http\Controllers\DonHangController::class, 'index']);
-        Route::get('/ban/index', [\App\Http\Controllers\BanUserController::class, 'index']);
-        Route::get('/data', [\App\Http\Controllers\BanUserController::class, 'getData']);
-        Route::get('/ban/{id}', [\App\Http\Controllers\BanController::class, 'ban']);
-        Route::get('/cart', [\App\Http\Controllers\ChiTietHoaDonController::class, 'index']);
-        Route::get('/cart/data', [\App\Http\Controllers\ChiTietHoaDonController::class, 'dataCart']);
-        Route::post('/add-to-cart', [\App\Http\Controllers\ChiTietHoaDonController::class, 'addToCart']);
+            Route::get('/ban/index', [\App\Http\Controllers\BanUserController::class, 'index']);
+            Route::get('/data', [\App\Http\Controllers\BanUserController::class, 'getData']);
+            Route::get('/ban/doi-trang-thai/{id}', [\App\Http\Controllers\BanUserController::class, 'doiTrangThai']);
+            Route::get('/ban/{id}', [\App\Http\Controllers\BanUserController::class, 'ban']);
+            Route::get('/cart/{id}', [\App\Http\Controllers\ChiTietHoaDonController::class, 'index']);
+            Route::get('/cart/data/{id}', [\App\Http\Controllers\ChiTietHoaDonController::class, 'dataCart']);
+            Route::post('/add-to-cart', [\App\Http\Controllers\ChiTietHoaDonController::class, 'addToCart']);
+            Route::post('/updateqty', [\App\Http\Controllers\ChiTietHoaDonController::class, 'updateqty']);
+            Route::get('/remove-cart/{id}', [\App\Http\Controllers\ChiTietHoaDonController::class, 'removeCart']);
+            Route::get('/create-bill/{id}', [\App\Http\Controllers\DonHangController::class, 'store']);
 });

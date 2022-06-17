@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Ban;
 use App\Models\ChiTietHoaDon;
 use App\Models\HoaDon;
+use App\Models\SanPham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class HoaDonController extends Controller
 {
@@ -26,7 +29,9 @@ class HoaDonController extends Controller
      */
     public function getData()
     {
-        $data = ChiTietHoaDon::all();
+        $data = ChiTietHoaDon::join('hoa_dons','hoa_dons.id', 'chi_tiet_hoa_dons')
+                            ->select('hoa_dons.*','chi_tiet_hoa_dons.*')
+                            ->get();
         return response()->json([
             'dulieu' => $data,
         ]);
@@ -38,10 +43,7 @@ class HoaDonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
