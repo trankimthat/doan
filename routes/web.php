@@ -77,9 +77,8 @@ Route::group(['prefix' => '/admin'], function() {
 
     });
     Route::group(['prefix' => '/hoa-don'], function() {
-        Route::get('/index', [\App\Http\Controllers\HoaDonController::class, 'index']);
         Route::get('/data', [\App\Http\Controllers\HoaDonController::class, 'getData']);
-
+        Route::get('/page-ban', [\App\Http\Controllers\BanController::class, 'pageBan']);
     });
 });
 

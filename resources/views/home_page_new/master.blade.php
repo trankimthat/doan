@@ -47,7 +47,15 @@
         .navbar-toggler{
             background-color: red;
         }
-
+        a.home {
+            cursor: pointer;
+        }
+        a#cart {
+            cursor: pointer;
+        }
+        a.navbar-brand.ms-4.ms-lg-0 {
+             cursor: pointer;
+        }
     </style>
 </head>
 
@@ -135,6 +143,8 @@
     <script src="/home_assets/app_assets/js/main.js"></script>
     @yield('js')
     <script>
+    $(document).ready(function() {
+
         $('.addToCart').click(function(){
             var id_san_pham = $(this).data('id');
             var url = window.location.pathname;
@@ -159,20 +169,21 @@
                         $.each(danh_sach_loi, function(key, value){
                             toastr.error(value[0]);
                         });
-                    });
-                    $('.cart').click(function{
-                    var url = window.location.pathname;
-                    var id_ban = url.substr(11);
-                    console.log(id_ban);
-                    $.ajax({
-                    url     :'/user/cart/'+ id_ban,
-                    type    : 'get',
-                    success : function(res) {
-                            toastr.success("Các món đã oder!");
-                    },
-                });
             });
+
         });
+        $('#cart').click(function(){
+                var url = window.location.pathname;
+                var id = url.substr(11);
+                window.location.href = "/user/cart/" + id;
+            });
+        $('.home').click(function(){
+            var url = window.location.pathname;
+            var id = url.substr(11);
+            window.location.href = "/home-page/" + id;
+        });
+
+    });
     </script>
 </body>
 

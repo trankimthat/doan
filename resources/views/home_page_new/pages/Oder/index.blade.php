@@ -33,7 +33,13 @@
              <div class="cart_totals float-md-right text-md-right">
                  <h2>Cart Totals</h2>
                  <div id="price " style="margin-bottom: 20px; font-size: 30px">
-                   <span>Tổng tiền hàng: <span id="tongTien" class="text-danger font-weight-bold"></span></span>
+                    <span>Tổng tiền Thực: <span id="tongTienThuc" class="text-danger font-weight-bold"></span></span>
+                  </div>
+                  <div id="price " style="margin-bottom: 20px; font-size: 30px">
+                    <span>Tổng tiền giảm: <span id="tongTienGiam" class="text-danger font-weight-bold"></span></span>
+                </div>
+                 <div id="price " style="margin-bottom: 20px; font-size: 30px">
+                   <span>Tổng tiền trả: <span id="tongTien" class="text-danger font-weight-bold"></span></span>
                  </div>
 
                  {{-- <table style="text-align: right" class="float-md-right">
@@ -86,13 +92,15 @@
         });
         function loadTable(){
             var url = window.location.pathname;
-            var id_ban = url.substr(11);
+            var id = url.substr(11);
             $.ajax({
-                url     :   '/user/cart/data/'+ id_ban ,
+                url     :   '/user/cart/data/'+ id ,
                 type    :   'get',
                 success :   function(res) {
                     var content_table = '';
                     var tongtien = 0;
+                    var tongTienThuc = 0;
+                    var tienGiam = 0;
                     $.each(res.data, function(key, value) {
                         content_table += '<tr class="align-middle">';
                         content_table += '<td><img style="height: 100px" src="'+value.anh_dai_dien+'" alt=""></td>';
@@ -109,9 +117,13 @@
                         content_table += '</td>';
                         content_table += '</tr>';
                         tongtien    = tongtien + value.so_luong * value.don_gia;
+                        tongTienThuc =  tongTienThuc + value.gia_ban * value.so_luong;
+                        tienGiam = tongTienThuc - tongtien;
                     });
                     $("#tableNhanVien tbody").html(content_table);
                     $("#tongTien").text(formatNumber(tongtien));
+                    $("#tongTienThuc").text(formatNumber(tongTienThuc));
+                    $("#tongTienGiam").text(formatNumber(tienGiam));
                 },
 
             });
@@ -173,9 +185,9 @@
         });
         $("#creatHoaDon").click(function(){
             var url = window.location.pathname;
-            var id_ban = url.substr(11);
+            var id = url.substr(11);
             $.ajax({
-                url     :'/user/create-bill/'+ id_ban,
+                url     :'/user/create-bill/'+ id,
                 type    : 'get',
                 success : function(res) {
                     if(res.status == 1){

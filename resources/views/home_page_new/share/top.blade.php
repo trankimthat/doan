@@ -5,24 +5,22 @@
             <small class="ms-4"><i class="fa fa-envelope me-2"></i>info@example.com</small>
         </div>
         <div class="col-lg-6 px-5 text-end">
-            <small>Follow us:</small>
-            <a class="text-body ms-3" href=""><i class="fab fa-facebook-f"></i></a>
-            <a class="text-body ms-3" href=""><i class="fab fa-twitter"></i></a>
-            <a class="text-body ms-3" href=""><i class="fab fa-linkedin-in"></i></a>
-            <a class="text-body ms-3" href=""><i class="fab fa-instagram"></i></a>
+            <a  class="text-body ms-3" href="/user/ban/index">
+                <button style="background: blue; font-size: 25px">Trang Bàn</button>
+            </a>
         </div>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-        <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
-            <h1 class="fw-bold text-primary m-0">Co<span class="text-secondary">ff</span>ee</h1>
+        <a  class="navbar-brand ms-4 ms-lg-0">
+            <h1 class="fw-bold text-primary m-0 home">Co<span class="text-secondary">ff</span>ee</h1>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a style="color: yellowgreen" href="index.html" class="nav-item nav-link active">Home</a>
+                <a style="color: yellowgreen"  class="nav-item nav-link active home">Home</a>
                 @foreach ($menuCha as $value_cha)
                 <div class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/danh-muc/{{$value_cha->slug_danh_muc}}-post{{ $value_cha->id }}" >{{ $value_cha->ten_danh_muc }}</a>
@@ -54,9 +52,13 @@
 
                     </small>
 
-                <button style="font-size: 50px" class="btn-sm-square bg-white rounded-circle ms-3 cart" data-idcart="id" >
+                {{-- <a style="font-size: 50px"  id="cartHref">
+                    <button class="btnbtn-primary" id="cart">123123</button>
+                </a> --}}
+                <a style="font-size: 30px" class="btn-sm-square bg-white rounded-circle ms-3" id="cart">
                     <small class="fa fa-shopping-bag text-body"></small>
-                </button>
+                </a>
+
             </div>
         </div>
     </nav>

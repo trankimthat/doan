@@ -17,25 +17,22 @@ class HoaDonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('admin.pages.hoa_don.index');
-    }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getData()
-    {
-        $data = ChiTietHoaDon::join('hoa_dons','hoa_dons.id', 'chi_tiet_hoa_dons')
-                            ->select('hoa_dons.*','chi_tiet_hoa_dons.*')
-                            ->get();
-        return response()->json([
-            'dulieu' => $data,
-        ]);
-    }
+    // public function getData()
+    // {
+    //     $data = ChiTietHoaDon::join('hoa_dons','hoa_dons.id', 'chi_tiet_hoa_dons.hoa_don_id')
+    //                         ->select('hoa_dons.*','chi_tiet_hoa_dons.*')
+    //                         ->get();
+    //     return response()->json([
+    //         'dulieu' => $data,
+    //     ]);
+    // }
 
     /**
      * Store a newly created resource in storage.

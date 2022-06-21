@@ -34,7 +34,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            function loadtale(){
+            function loadTable(){
                 $.ajax({
                     url     :   '/user/data',
                     type    :   'get',
@@ -72,7 +72,7 @@
                     }
                     });
             }
-            loadtale();
+            loadTable();
             $('body').on('click','.table',function(){
                     var id = $(this).data('id');
                     $.ajax({
@@ -95,13 +95,13 @@
             var id = $(this).data('idtrangthai');
             var self = $(this);
             $.ajax({
-                url     :     '/admin/danh-muc-san-pham/doi-trang-thai/' + id,
+                url     :     '/user/ban/doi-trang-thai/' + id,
                 type    :     'get',
                 success :     function(res) {
                     if(res.trangThai) {
                         toastr.success('Đã đổi trạng thái thành công!');
                         // Tình trạng mới là true
-                        // loadTable();
+                        loadTable();
                         if(res.tinhTrangDanhMuc == true){
                             self.html('Bàn Trống');
                             self.removeClass('btn-danger');

@@ -99,7 +99,9 @@ class DanhMucSanPhamController extends Controller
     }
     public function search(Request $request)
     {
-        $data = DanhMucSanPham::where('ten_danh_muc', 'like', '%' . $request->tenDanhMuc .'%') ->get();
+        $data = DanhMucSanPham::where('ten_danh_muc', 'like', '%' . $request->tenDanhMuc .'%')
+                                ->where('id_danh_muc_cha', 0)
+                                ->get();
         // dd($data);
         return response()->json(['dataProduct' => $data]);
 

@@ -18,7 +18,7 @@ class DonHangController extends Controller
             if($agent) {
                 $ban = Ban::find($id);
                 $giohang = ChiTietHoaDon::where('is_cart', 1)
-                                        ->where('agent_id', $agent->id)
+                                        ->where('agent_id', $id)
                                         ->where('id_ban', $id )
                                         ->get();
                 if(empty($giohang) || count($giohang) > 0) {
@@ -60,6 +60,5 @@ class DonHangController extends Controller
                 }
 
             }
-
     }
 }

@@ -17,7 +17,7 @@ class ChiTietHoaDonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         return view('home_page_new.pages.Oder.index');
     }
@@ -55,6 +55,34 @@ class ChiTietHoaDonController extends Controller
         } else {
             return response()->json(['status'=>false]);
         }
+        //  $thuc_tra = 0; $tong_tien = 0;
+        //             foreach($giohang as $key => $value) {
+        //                 $sanPham = SanPham::find($value->san_pham_id);
+        //                 if($sanPham){
+        //                     $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
+        //                     $thuc_tra += $value->so_luong * $giaBan;
+        //                     $tong_tien += $value->so_luong * $sanPham->gia_ban;
+
+
+        //                     $value->don_gia  = $giaBan;
+        //                     $value->is_cart  = 0;
+        //                     // $value->id_ban  = $ban->id_ban;
+        //                     $value->hoa_don_id  = $hoadon->id;
+        //                     $value->save();
+        //                 } else {
+        //                     $value->delete();
+        //                 }
+        //             }
+        //             $hoadon->thuc_tra = $thuc_tra;
+        //             $hoadon->tong_tien = $tong_tien;
+        //             $hoadon->tien_giam_gia = $tong_tien - $thuc_tra;
+        //             $hoadon->save();
+
+        //             return response()->json(['status' => true]);
+        //         } else {
+        //             return response()->json(['status' => 2]);
+        //         }
+
     }
 
     public function updateqty(Request $request)
@@ -83,18 +111,15 @@ class ChiTietHoaDonController extends Controller
                                    ->where('agent_id', $agent->id)
                                    ->where('id_ban', $id)
                                    ->where('is_cart', 1)
-                                   ->select('chi_tiet_hoa_dons.*', 'san_phams.anh_dai_dien')
+                                   ->select('chi_tiet_hoa_dons.*', 'san_phams.anh_dai_dien', 'san_phams.gia_ban')
                                    ->get();
-            // dd($data->toArray());
+
             return response()->json(['data' => $data]);
         }
     }
 
     public function removeCart($id){
         $agent = Auth::guard('agent')->user();
-        // $id_sanPham = $request->id;
-        // $chitiet = ChiTietHoaDon::find($id);
-        // if($agent){
             $chiTietDonHang = ChiTietHoaDon::where('is_cart', 1)
                                             ->where('agent_id', $agent->id)
                                             ->where('id',  $id)
@@ -106,7 +131,6 @@ class ChiTietHoaDonController extends Controller
                                             }else{
                                                 return response()->json(['status' => false]);
                                             }
-            // $chiTietDonHang->delete();
-        // }
+
     }
 }

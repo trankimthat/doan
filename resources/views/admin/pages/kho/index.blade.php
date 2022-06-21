@@ -121,7 +121,7 @@
                 success :   function(res) {
                     var html = '';
 
-                    $.each(res.list, function(key, value) {
+                    $.each(res.danh_muc_cha, function(key, value) {
 
                         html += '<tr>';
                         html += '<th scope="row">' + (key + 1) + '</th>';
@@ -215,16 +215,13 @@
             var payload = {
                 'id_danh_muc'   :   id_danh_muc,
             };
-            console.log(payload);
             $.ajax({
                 url     :   '/admin/kho/create',
                 type    :   'post',
                 data    :   payload,
                 success :   function(res) {
-
                         toastr.success("Đã thêm danh muc !");
                         tableBenPhai();
-
                 },
                 error   :   function(res) {
                     var listError = res.responseJSON.errors;
@@ -234,7 +231,6 @@
                 },
             });
         });
-
         $("body").on('change', '.qty', function(){
             var payload = {
                 'id'       :   $(this).data('id'),
@@ -297,7 +293,6 @@
                     if(res.status){
                         toastr.success("Đã nhập kho danh muc mục !");
                         tableBenPhai();
-
                     }else{
                         toastr.error("không có đơn giá/số lượng danh mục sản phẩm nào !");
                         tableBenPhai();
