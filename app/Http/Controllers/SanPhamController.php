@@ -84,11 +84,11 @@ class SanPhamController extends Controller
             'status' => true,
         ]);
     }
-    // public function search(Request $request)
-    // {
-    //     $data = SanPham::where('ten_san_pham', 'like', '%' . $request->tenSanPham .'%')->get();
-    //     // dd($data);
-    //     return response()->json(['dataProduct' => $data]);
+    public function search(Request $request)
+    {
+        $data = SanPham::where('ten_san_pham', 'like', '%' . $request->tenSanPham .'%')->get();
+        // dd($data->toArray());
+        return response()->json(['dataProduct' => $data]);
 
-    // }
+    }
 }

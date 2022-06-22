@@ -175,8 +175,6 @@
                 type    :   'get',
                 success :   function(res) {
                     var html = '';
-                    var tongTien = 0;
-                    var tongSanPham = 0;
 
                     $.each(res.nhapKho, function(key, value) {
 
@@ -195,12 +193,9 @@
                         html += '<button class="btn btn-danger delete mr-1" data-iddelete="'+ value.id +'" data-toggle="modal" data-target="#deleteModal">Delete</button>';
                         html += '</td>';
                         html += '</tr>';
-                        // tongTien = tongTien + value.so_luong * value.don_gia;
-                        // tongSanPham = tongSanPham + value.so_luong;
                     });
                     $("#tableBenPhai tbody").html(html);
-                    // $("#tongTien").html(tongTien);
-                    // $("#tongSanPham").html(tongSanPham);
+
                 },
             });
         }
@@ -269,13 +264,8 @@
                 type    :   'post',
                 data    :   payload,
                 success :   function(res) {
-                    if(res.status == false) {
-                        toastr.error("Cập nhật thất bại đơn giá lớn hơn 1");
-                        tableBenPhai();
-                    } else {
                         toastr.success("Đã cập nhật đơn giá sản phẩm!");
                         tableBenPhai();
-                    }
                 },
                 error   :   function(res) {
                     var listError = res.responseJSON.errors;
@@ -295,7 +285,7 @@
                         tableBenPhai();
                     }else{
                         toastr.error("không có đơn giá/số lượng danh mục sản phẩm nào !");
-                        tableBenPhai();
+                        // tableBenPhai();
                     }
                 },
 

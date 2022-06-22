@@ -18,5 +18,6 @@ class HoaDon extends Model
         'id_ban',
         'agent_id',
         'loai_thanh_toan',
+        'xuat_hoa_don',
     ];
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ban;
+use App\Models\SanPham;
 use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,5 +27,4 @@ class HomePageController extends Controller
 
 
     }
-
 }

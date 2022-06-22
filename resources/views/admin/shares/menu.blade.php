@@ -45,7 +45,7 @@
               </li>
               <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/kho/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Lý Kho</span></a>
               </li>
-              <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/hoadon/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Lý Hóa Đơn</span></a>
+              <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/hoa-don/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Lý Hóa Đơn</span></a>
               </li>
               <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/user/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Tài Khoản Nhân Viên</span></a>
               </li>

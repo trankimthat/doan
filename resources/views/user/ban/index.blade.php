@@ -3,20 +3,7 @@
 @extends('user.master')
 @section('content')
     <div class = "row" id="tableBan">
-            {{-- <div class="card">
-                <div class="card-body text-center">
-                    <b>bàn 1</b>
-                </div>
-              <div class="card-body">
-                <form class="form form-vertical">
-                  <div class="row">
-                    <div class="col-12">
-                      <button type="reset" class="btn btn-primary mr-1 waves-effect waves-float waves-light">Submit</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div> --}}
+
     </div>
 @endsection
 @section('js')

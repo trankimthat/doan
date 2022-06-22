@@ -1,11 +1,22 @@
 @extends('home_page_new.master')
 @section('content')
 <div class="container-xxl py-5">
+    {{-- @foreach ($data as $key_tim => $value_tim ) --}}
     <div class="container">
         <div class="row g-0 gx-5 align-items-end">
-            <div class="col-lg-6">
+            <div class="col-lg-2">
                 <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                     <h1 class="display-5 mb-3">order a drink</h1>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                    <fieldset class="form-group position-relative">
+                        <input id="searchSanPham" type="text" class="form-control form-control mb-1" placeholder="nhập tên sản phẩm">
+                        {{-- <a class="btn-sm-square bg-white rounded-circle ms-3 " href="">
+                            <small class="fa fa-search text-body"></small>
+                        </a> --}}
+                    </fieldset>
                 </div>
             </div>
             <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: slideInRight;">
@@ -63,7 +74,35 @@
 
         </div>
     </div>
+    {{-- @endforeach --}}
+
 </div>
 @endsection
+{{-- @section('js')
+<script>
+    $(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $("#searchSanPham").keyup(function(){
+        var search = $("#searchSanPham").val();
+        $payload = {
+            'tenSanPham': search,
+        };
+        $.ajax({
+            url: '/admin/san-pham/search',
+            type: 'post',
+            data: $payload,
+            success: function (res) {
+
+            }
+        });
+    });
+});
+</script>
+
+@endsection --}}
 
 

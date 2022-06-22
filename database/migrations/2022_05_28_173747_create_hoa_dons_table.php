@@ -22,6 +22,7 @@ class CreateHoaDonsTable extends Migration
             $table->integer('agent_id');
             $table->integer('id_ban');
             $table->integer('loai_thanh_toan');
+            $table->integer('xuat_hoa_don')->default(1);
             $table->timestamps();
         });
     }

@@ -68,8 +68,5 @@ class BanController extends Controller
             ]);
         }
     }
-    public function pageBan(){
-        return view('admin.pages.ban.page_ban');
-    }
 
 }

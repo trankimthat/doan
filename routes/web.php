@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/home-page/{id}', [\App\Http\Controllers\HomePageController::class, 'index']);
-//  Route::get('/home-page/{id}', [\App\Http\Controllers\HomePageController::class, 'index']);
+Route::post('/search', [\App\Http\Controllers\HomePageController::class, 'search']);
 
 Route::group(['prefix' => '/admin'], function() {
     Route::get('/index', [\App\Http\Controllers\AdminController::class, 'index']);
@@ -77,8 +77,11 @@ Route::group(['prefix' => '/admin'], function() {
 
     });
     Route::group(['prefix' => '/hoa-don'], function() {
-        Route::get('/data', [\App\Http\Controllers\HoaDonController::class, 'getData']);
-        Route::get('/page-ban', [\App\Http\Controllers\BanController::class, 'pageBan']);
+        Route::get('/index', [\App\Http\Controllers\HoaDonController::class, 'index']);
+        Route::get('/data/{id}', [\App\Http\Controllers\HoaDonController::class, 'getData']);
+        Route::get('/page-ban', [\App\Http\Controllers\HoaDonController::class, 'banData']);
+        Route::get('/ban/{id}', [\App\Http\Controllers\HoaDonController::class, 'ban']);
+        Route::get('/in-bill/{id}', [\App\Http\Controllers\HoaDonController::class, 'store']);
     });
 });
 

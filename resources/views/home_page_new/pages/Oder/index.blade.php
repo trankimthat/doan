@@ -139,7 +139,7 @@
                 'id'       :   $(this).data('id'),
                 'so_luong' :   $(this).val(),
             };
-            console.log(payload);
+
             $.ajax({
                 url     :   '/user/updateqty',
                 type    :   'post',

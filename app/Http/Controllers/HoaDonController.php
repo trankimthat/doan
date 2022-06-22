@@ -12,78 +12,70 @@ use Illuminate\Support\Str;
 
 class HoaDonController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function getData()
-    // {
-    //     $data = ChiTietHoaDon::join('hoa_dons','hoa_dons.id', 'chi_tiet_hoa_dons.hoa_don_id')
-    //                         ->select('hoa_dons.*','chi_tiet_hoa_dons.*')
-    //                         ->get();
-    //     return response()->json([
-    //         'dulieu' => $data,
-    //     ]);
-    // }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\HoaDon  $hoaDon
-     * @return \Illuminate\Http\Response
-     */
-    public function show(HoaDon $hoaDon)
+    public function index(){
+        return view('admin.pages.hoa_don.index');
+    }
+    public function banData()
     {
-        //
+        $data = Ban::all();
+        return response()->json([
+            'dulieu' => $data,
+        ]);
+    }
+    public function getData($id)
+    {
+
+
+        $data = HoaDon::join('chi_tiet_hoa_dons','chi_tiet_hoa_dons.hoa_don_id', 'hoa_dons.id')
+                        ->join('bans' , 'bans.id' , 'hoa_dons.id_ban')
+                        //  ->join('san_phams', 'chi_tiet_hoa_dons.san_pham_id', 'san_phams.id')
+                            ->where('xuat_hoa_don', 1)
+                            ->where('bans.id', $id)
+                            ->select('hoa_dons.*','chi_tiet_hoa_dons.*')
+                            ->get();
+
+        return response()->json([
+            'dulieu' => $data,
+        ]);
+
+
+    }
+    public function ban($id){
+        $ban = Ban::find($id);
+        if($ban) {
+            return response()->json([
+                'status'  =>  true,
+                'data'    =>  $ban,
+            ]);
+        } else {
+            return response()->json([
+                'status'  =>  false,
+            ]);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\HoaDon  $hoaDon
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(HoaDon $hoaDon)
-    {
-        //
-    }
+   public function store($id){
+        $data = HoaDon::join('chi_tiet_hoa_dons','chi_tiet_hoa_dons.hoa_don_id', 'hoa_dons.id')
+                        ->join('bans' , 'bans.id' , 'hoa_dons.id_ban')
+                        //  ->join('san_phams', 'chi_tiet_hoa_dons.san_pham_id', 'san_phams.id')
+                        ->where('xuat_hoa_don', 1)
+                        ->where('bans.id', $id)
+                        ->select('hoa_dons.*')
+                        ->get();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\HoaDon  $hoaDon
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, HoaDon $hoaDon)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\HoaDon  $hoaDon
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(HoaDon $hoaDon)
-    {
-        //
-    }
+        if(count($data)){
+            foreach ($data as $value) {
+                $tmp  = HoaDon::find($value->id);
+                $tmp->xuat_hoa_don = 0;
+                $tmp->save();
+            }
+            return response()->json([
+                'status'=>true,
+            ]);
+        }else{
+            return response()->json([
+                'status'=>false,
+            ]);
+        }
+   }
 }

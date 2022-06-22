@@ -15,12 +15,15 @@ class DonHangController extends Controller
     public function store($id)
     {
             $agent = Auth::guard('agent')->user();
+            // dd($agent);
             if($agent) {
                 $ban = Ban::find($id);
+
                 $giohang = ChiTietHoaDon::where('is_cart', 1)
-                                        ->where('agent_id', $id)
+                                        ->where('agent_id', $agent->id)
                                         ->where('id_ban', $id )
                                         ->get();
+
                 if(empty($giohang) || count($giohang) > 0) {
                     $hoadon = HoaDon::create([
                         'ma_hoa_don'   => Str::uuid(),
@@ -30,6 +33,7 @@ class DonHangController extends Controller
                         'id_ban'        => $ban->id,
                         'agent_id'      => $agent->id,
                         'loai_thanh_toan'   => 1,
+                        'xuat_hoa_don'      => 1,
                     ]);
                     $thuc_tra = 0; $tong_tien = 0;
                     foreach($giohang as $key => $value) {

@@ -21,7 +21,7 @@ class KhoController extends Controller
     public function create()
     {
         // Bước 1: Lấy toàn bộ dữ liệu đang là kho đang nhập => type = 0
-        $data = Kho::where('type', 0)->where('thanh_tien',NULL)->get(); // trả về 1 array
+        $data = Kho::where('type', 0)->whereNull('thanh_tien')->get(); // trả về 1 array
 
         foreach($data as $key => $value) {
             // Cập nhật số lượng của sản phẩm
@@ -37,7 +37,7 @@ class KhoController extends Controller
                     return response()->json(['status' => true]);
                 } else {
                     $value->delete();
-                    return response()->json(['status' => false]);
+                    // return response()->json(['status' => false]);
                 }
             } else {
                 $value->delete();
@@ -48,10 +48,10 @@ class KhoController extends Controller
     public function getData()
     {
         $data = Kho::join('danh_muc_san_phams','khos.id_danh_muc', 'danh_muc_san_phams.id')
-
                               ->select('khos.*', 'danh_muc_san_phams.ten_danh_muc')
                               ->where('khos.type',0)
                               ->get();
+
         return response()->json([
             'nhapKho' => $data,
         ]);
