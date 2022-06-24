@@ -84,11 +84,22 @@ class SanPhamController extends Controller
             'status' => true,
         ]);
     }
-    public function search(Request $request)
-    {
-        $data = SanPham::where('ten_san_pham', 'like', '%' . $request->tenSanPham .'%')->get();
-        // dd($data->toArray());
-        return response()->json(['dataProduct' => $data]);
+    // public function search(Request $request)
+    // {
+    //     // $data = SanPham::where('ten_san_pham', 'like', '%' . $request->tenSanPham .'%')->get();
+    //     $danhMuc = DanhMucSanPham::find($request->id);
+    //     $data = SanPham::join('danh_muc_san_phams','danh_muc_san_phams.id','san_phams.id_danh_muc')
+    //                     ->where('danh_muc_san_phams.id_danh_muc_cha','<>',0)
+    //                     ->where('id_danh_muc_cha', $danhMuc->id)
+    //                     ->where('ten_san_pham', 'like', '%' . $request->tenSanPham .'%')
+    //                     ->select('san_phams.*')
+    //                     ->get();
+    //     // $data = DanhMucSanPham::where('id_danh_muc_cha',$request->id)->get();
+    //     // dd($data->toArray());
+    //     return response()->json([
+    //         'dataProduct' => $data,
+    //     ]);
+    //     // return view(compact('data'));
 
-    }
+    // }
 }

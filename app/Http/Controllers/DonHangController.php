@@ -24,7 +24,7 @@ class DonHangController extends Controller
                                         ->where('id_ban', $id )
                                         ->get();
 
-                if(empty($giohang) || count($giohang) > 0) {
+                if(  count($giohang) > 0) {
                     $hoadon = HoaDon::create([
                         'ma_hoa_don'   => Str::uuid(),
                         'tong_tien'     => 0,

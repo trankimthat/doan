@@ -22,7 +22,9 @@ License: You must have a valid license purchased only from themeforest(the above
         button.doiTrangThai.btn.btn-danger {
         margin-left: 110px;
         }
-
+        .row.col-md-3 {
+        margin-top: 30px;
+        }
     </style>
   </head>
   <!-- END: Head-->

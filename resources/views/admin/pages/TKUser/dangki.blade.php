@@ -36,7 +36,7 @@
                     </g>
                   </g>
                 </svg></span>
-              <h2 class="brand-text mb-0"><a style="text-decoration: none" href="/">Trang Quản Lý Cafe</a> </h2>
+              <h2 class="brand-text mb-0"><a style="text-decoration: none" href="/admin/index">Trang Quản Lý Cafe</a> </h2>
             </li>
         </ul>
     </div>

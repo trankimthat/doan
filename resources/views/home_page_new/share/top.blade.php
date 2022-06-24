@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a style="color: yellowgreen"  class="nav-item nav-link active home">Home</a>
-                @foreach ($menuCha as $value_cha)
+                {{-- @foreach ($menuCha as $value_cha)
                 <div class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/danh-muc/{{$value_cha->slug_danh_muc}}-post{{ $value_cha->id }}" >{{ $value_cha->ten_danh_muc }}</a>
                     <div class="dropdown-menu m-0 " style="background: rgba(0, 0,0, 0) ; border: none">
@@ -36,7 +36,7 @@
                 <a href="about.html" class="nav-item nav-link">About Us</a>
                 <a href="product.html" class="nav-item nav-link">Products</a>
 
-                <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                <a href="contact.html" class="nav-item nav-link">Contact Us</a> --}}
             </div>
             <div class="d-none d-lg-flex ms-2">
 

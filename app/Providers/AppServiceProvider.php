@@ -31,15 +31,23 @@ class AppServiceProvider extends ServiceProvider
                                  ->where('is_open', 1)
                                  ->get();
 
-        foreach($menuCha as $key => $value_cha) {
-            $value_cha->tmp = $value_cha->id;
+        // foreach($menuCha as $key => $value_cha) {
+        //     $value_cha->tmp = $value_cha->id;
+        //     foreach($menuCon as $key => $value_con) {
+        //         if($value_con->id_danh_muc_cha == $value_cha->id) {
+        //             $value_cha->tmp =  $value_cha->tmp . ', ' . $value_con->id;
+        //         }
+        //     }
+        // }
+
+        //  foreach($menuCha as $key => $value_cha) {
+        //     $value_cha->tmp = $value_cha->id;
             foreach($menuCon as $key => $value_con) {
-                if($value_con->id_danh_muc_cha == $value_cha->id) {
-                    $value_cha->tmp =  $value_cha->tmp . ', ' . $value_con->id;
+                if($value_con->id_danh_muc_cha) {
+                    $value_con->tmp =  $value_con->tmp . ', ' . $value_con->id;
                 }
             }
-        }
-
+        // }
         view()->share('menuCha', $menuCha);
         view()->share('menuCon', $menuCon);
     }

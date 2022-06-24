@@ -21,10 +21,13 @@ License: You must have a valid license purchased only from themeforest(the above
         margin-left: 13px;
         }
         button.doiTrangThai.btn.btn-danger {
-        margin-left: 13px;
+        margin-left: 6px;
         }
         .row.col-md-12 {
          margin-left: 1px;
+        }
+        .row.col-md-3 {
+         margin-top: 30px;
         }
     </style>
   </head>

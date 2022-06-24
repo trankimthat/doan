@@ -12,7 +12,6 @@ class Ban extends Model
 
     protected $fillable = [
         'ma_ban',
-        'id_hoa_don',
         'is_open',
     ];
 }

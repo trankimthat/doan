@@ -56,6 +56,7 @@
         a.navbar-brand.ms-4.ms-lg-0 {
              cursor: pointer;
         }
+
     </style>
 </head>
 
@@ -145,33 +146,7 @@
     <script>
     $(document).ready(function() {
 
-        $('.addToCart').click(function(){
-            var id_san_pham = $(this).data('id');
-            var url = window.location.pathname;
-            var id_ban = url.substr(11);
-            // console.log(id_ban);
-                var payload = {
-                    'san_pham_id'   : id_san_pham,
-                    'id_ban'        : id_ban,
-                    'so_luong'      : 1,
-                };
-                axios
-                    .post('/user/add-to-cart', payload)
-                    .then((res) => {
-                         if(res.data.status) {
-                            toastr.success("Đã thêm vào giỏ hàng!");
-                        } else {
-                            toastr.error("Bạn thêm vào giỏ thất bại !");
-                        }
-                    })
-                    .catch((res) => {
-                        var danh_sach_loi = res.response.data.errors;
-                        $.each(danh_sach_loi, function(key, value){
-                            toastr.error(value[0]);
-                        });
-            });
 
-        });
         $('#cart').click(function(){
                 var url = window.location.pathname;
                 var id = url.substr(11);

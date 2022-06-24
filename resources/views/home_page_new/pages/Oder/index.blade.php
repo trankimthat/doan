@@ -84,7 +84,6 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        console.log(123);
         $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -146,7 +145,7 @@
                 data    :   payload,
                 success :   function(res) {
                     if(res.status == false) {
-                        toastr.error('Cập nhật thất bại số lượng lớn hơn 0');
+                        toastr.error('Cập nhật thất bại hoặc số lượng nhỏ hơn 0');
                         loadTable();
                     } else {
                         toastr.success("Đã cập nhật số lượng sản phẩm!");

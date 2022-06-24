@@ -32,7 +32,7 @@ class BanUserController extends Controller
         if($ban) {
             return response()->json([
                 'status'  =>  true,
-                'data'    =>  $ban,
+                // 'data'    =>  $ban,
             ]);
         } else {
             return response()->json([

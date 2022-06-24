@@ -14,6 +14,9 @@
     <div class="col-md-6" >
         <div class="main-card mb-3 card">
             <div class="card-body" style="text-align: center"><h5 class="card-title">HÓA ĐƠN</h5>
+                <div >
+                    <h3 id="maBan"></h3>
+                </div>
                 <table class="mb-0 table table-bordered" id="tableBanRight">
                     <thead>
                         <tr>
@@ -91,6 +94,13 @@
                             var text_button  = 'Bàn Đầy';
                             var class_button = 'btn-danger';
                             }
+                            if(value.xuat_hoa_don){
+                                var class_a = 'btn-danger';
+                                var text    = 'Đã oder'
+                            }else{
+                                var class_a = 'btn-primary';
+                                var text = 'Chưa oder';
+                            }
                             content_table += '<div class="row col-md-3 ">'
                             content_table += '<div class="col-md-12">';
                             content_table += '<div class="card bg-primary text-white">';
@@ -123,6 +133,7 @@
                         var tongtienthuc = 0;
                         var tongTienGiam = 0;
                         var tongTienTra = 0;
+                        var ma_ban = '';
                         $("#id_ban_thanh_toan").val(id);
                         $.each(res.dulieu, function(key, value) {
                         content_table += '<tr>';
@@ -136,11 +147,14 @@
                         tongtienthuc = value.tong_tien;
                         tongTienTra = value.thuc_tra;
                         tongTienGiam = value.tien_giam_gia;
+                        ma_ban = value.ma_ban;
                         });
                         $("#tableBanRight tbody").html(content_table);
                         $("#tongTien").text(formatNumber(tongtienthuc));
                         $("#tongTienGiam").text(formatNumber(tongTienGiam));
                         $("#tongTienThucTra").text(formatNumber(tongTienTra));
+                        $("#maBan").text(ma_ban);
+
                     }
                 });
             }

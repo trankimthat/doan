@@ -7,6 +7,7 @@ use App\Models\ChiTietHoaDon;
 use App\Models\HoaDon;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -31,7 +32,7 @@ class HoaDonController extends Controller
                         //  ->join('san_phams', 'chi_tiet_hoa_dons.san_pham_id', 'san_phams.id')
                             ->where('xuat_hoa_don', 1)
                             ->where('bans.id', $id)
-                            ->select('hoa_dons.*','chi_tiet_hoa_dons.*')
+                            ->select('hoa_dons.*','chi_tiet_hoa_dons.*','bans.ma_ban')
                             ->get();
 
         return response()->json([
@@ -77,5 +78,16 @@ class HoaDonController extends Controller
                 'status'=>false,
             ]);
         }
+   }
+   public function page(){
+    return view('admin.pages.hoa_don_ngay.index');
+   }
+   public function tongHD(){
+    $HD = HoaDon::all();
+    $thang=Carbon::now()->month();
+    return response()->json([
+        'data' => $HD,
+        'kkk'   => $thang,
+    ]);
    }
 }

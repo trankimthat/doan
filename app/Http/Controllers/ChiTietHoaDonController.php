@@ -61,11 +61,11 @@ class ChiTietHoaDonController extends Controller
     public function updateqty(Request $request)
     {
 
-            $khoHang = ChiTietHoaDon::where('id', $request->id)->where('is_cart', 1)->whereNull('hoa_don_id')->first();
-            if($khoHang) {
-                $khoHang->so_luong = $request->so_luong;
-                if($khoHang->so_luong > 0){
-                    $khoHang->save();
+            $mon = ChiTietHoaDon::where('id', $request->id)->where('is_cart', 1)->whereNull('hoa_don_id')->first();
+            if($mon) {
+                $mon->so_luong = $request->so_luong;
+                if($mon->so_luong > 0){
+                    $mon->save();
                     return response()->json(['status' => true]);
                 }else{
                     return response()->json(['status' => false]);

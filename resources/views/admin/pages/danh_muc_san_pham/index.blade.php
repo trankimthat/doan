@@ -29,10 +29,10 @@
                     <div class="position-relative form-group">
                         <label>Danh Mục Cha</label>
                         <select id="id_danh_muc_cha" name="id_danh_muc_cha" class="form-control">
-                            {{-- <option value="">Danh Mục Root</option>
+                            <option value="">Danh Mục Root</option>
                             @foreach ($danh_muc_cha as $key => $value)
                             <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                     </div>
                     <div class="position-relative form-group">
@@ -113,7 +113,10 @@
             <div class="position-relative form-group">
                 <label>Danh Mục Cha</label>
                 <select id="id_danh_muc_cha_edit"class="form-control">
-
+                     <option value="">Danh Mục Root</option>
+                         @foreach ($list_danh_muc as $key => $value)
+                        <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
+                        @endforeach
                 </select>
             </div>
             <div class="position-relative form-group">
@@ -138,7 +141,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        console.log(123);
+        // console.log(123);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -191,18 +194,15 @@
                         content_table += '</td>';
                         content_table += '</tr>';
                     });
-                    var list_cha = res.danh_muc_cha;
-                    var content_select = '<option value="">Danh Mục Root</option>';
+                    // var list_cha = res.danh_muc_cha;
+                    // var content_select = '<option value="">Danh Mục Root</option>';
 
-                    $.each(list_cha, function(key, value) {
-                        content_select += '<option value=' + value.id + '>' + value.ten_danh_muc + '</option>';
-                    });
-                    $("#id_danh_muc_cha").html(content_select);
-                    $("#id_danh_muc_cha_edit").html(content_select);
+                    // $.each(list_cha, function(key, value) {
+                    //     content_select += '<option value=' + value.id + '>' + value.ten_danh_muc + '</option>';
+                    // });
+                    // $("#id_danh_muc_cha").html(content_select);
+                    // $("#id_danh_muc_cha_edit").html(content_select);
                     $("#tableDanhMuc tbody").html(content_table);
-
-                    console.log(content_select);
-                    console.log(content_table);
                 },
             });
         }
@@ -246,12 +246,6 @@
                     toastr.success("Đã thêm mới danh mục thành công!");
                     loadTable();
                     $('#createDanhMuc').trigger("reset");
-                    $('#holder').attr('src', '');
-                    // $("#ten_danh_muc").val();
-                    // $("#slug_danh_muc").val('');
-                    // $("#hinh_anh").val('');
-                    // $("#id_danh_muc_cha").val('');
-                    // $("#is_open").val('');
                 },
                 error   :    function(res) {
                     var danh_sach_loi = res.responseJSON.errors;
@@ -309,6 +303,7 @@
         });
         $('body').on('click','.edit',function(){
             var id = $(this).data('idedit');
+            console.log(id);
             $.ajax({
                 url     :   '/admin/danh-muc-san-pham/edit/' + id,
                 type    :   'get',
@@ -336,15 +331,14 @@
             var val_id_danh_muc_cha = $("#id_danh_muc_cha_edit").val();
             var val_is_open         = $("#is_open_edit").val();
             var val_id              = $("#id_edit").val();
-
             var payload = {
                 'ten_danh_muc'      :   val_ten_danh_muc,
                 'slug_danh_muc'     :   val_slug_danh_muc,
-
                 'id_danh_muc_cha'   :   val_id_danh_muc_cha,
                 'is_open'           :   val_is_open,
                 'id'                :   val_id,
             };
+
 
             // Gửi payload lên trên back-end bằng con đường ajax
             $.ajax({
@@ -356,7 +350,6 @@
                         toastr.success('Danh mục sản phẩm đã được cập nhật!');
                         $('#closeModalUpdate').click();
                         loadTable();
-                        $('#holder_edit').attr('src', '');
                     }
                 },
                 error   :   function(res) {

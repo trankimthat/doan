@@ -7,13 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateDanhMucSanPhamRequest;
 use App\Http\Requests\UpdateDanhMucSanPhamRequest;
+use App\Models\SanPham;
 
 class DanhMucSanPhamController extends Controller
 {
 
     public function index()
+
     {
-        return view('admin.pages.danh_muc_san_pham.index');
+        $list_danh_muc = DanhMucSanPham::where('is_open', 1)->get();
+        $danh_muc_cha = DanhMucSanPham::where('is_open', 1)->where('id_danh_muc_cha', 0)->orWhereNull('id_danh_muc_cha')->get();
+        return view('admin.pages.danh_muc_san_pham.index', compact('list_danh_muc', 'danh_muc_cha'));
     }
 
     public function getData()
@@ -29,6 +33,8 @@ class DanhMucSanPhamController extends Controller
             'list'          => $data,
             'danh_muc_cha'  => $danh_muc_cha,
         ]);
+        // $array = [ "id" => [1,2,3], "ten" => "tien","hoang","cs001"];
+        // dd($array);
     }
 
     public function store(CreateDanhMucSanPhamRequest $request)
@@ -94,7 +100,7 @@ class DanhMucSanPhamController extends Controller
         $data     = $request->all();
         $danh_muc = DanhMucSanPham::find($request->id);
         $danh_muc->update($data);
-
+        // dd($danh_muc->toArray());
         return response()->json(['status'=> true]);
     }
     public function search(Request $request)
