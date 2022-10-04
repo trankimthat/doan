@@ -26,15 +26,13 @@
                         <input id="slug_danh_muc" name="slug_danh_muc" placeholder="Nhập vào slug danh mục" type="text" class="form-control">
                     </div>
 
-                    <div class="position-relative form-group">
+                    {{-- <div class="position-relative form-group">
                         <label>Danh Mục Cha</label>
                         <select id="id_danh_muc_cha" name="id_danh_muc_cha" class="form-control">
-                            <option value="">Danh Mục Root</option>
-                            @foreach ($danh_muc_cha as $key => $value)
-                            <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
-                            @endforeach
+
+
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="position-relative form-group">
                         <label>Tình Trạng</label>
                         <select id="is_open"class="form-control">
@@ -55,7 +53,6 @@
                         <tr>
                             <th class="text-center">#</th>
                             <th class="text-center">Tên Danh Mục</th>
-                            <th class="text-center">Danh Mục Cha</th>
                             <th class="text-center">Tình Trạng</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -109,16 +106,6 @@
                 <label>Slug Danh Mục</label>
                 <input id="slug_danh_muc_edit" placeholder="Nhập vào slug danh mục" type="text" class="form-control">
             </div>
-
-            <div class="position-relative form-group">
-                <label>Danh Mục Cha</label>
-                <select id="id_danh_muc_cha_edit"class="form-control">
-                     <option value="">Danh Mục Root</option>
-                         @foreach ($list_danh_muc as $key => $value)
-                        <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
-                        @endforeach
-                </select>
-            </div>
             <div class="position-relative form-group">
                 <label>Tình Trạng</label>
                 <select id="is_open_edit"class="form-control">
@@ -165,14 +152,14 @@
                 url     :   '/admin/danh-muc-san-pham/data',
                 type    :   'get',
                 success :   function(res) {
-                    var list_danh_muc = res.list;
+                    // var list_danh_muc = res.list;
                     var content_table = '';
-                    $.each(list_danh_muc, function(key, value) {
-                        if(value.ten_danh_muc_cha === null) {
-                            var ten_danh_muc_cha = 'Root';
-                        } else {
-                            var ten_danh_muc_cha = value.ten_danh_muc_cha;
-                        }
+                    $.each(res.danh_muc_cha, function(key, value) {
+                        // if(value.ten_danh_muc_cha === null) {
+                        //     var ten_danh_muc_cha = 'Root';
+                        // } else {
+                        //     var ten_danh_muc_cha = value.ten_danh_muc_cha;
+                        // }
                         if(value.is_open) {
                             var class_button = 'btn-primary';
                             var text_button  = 'Hiển thị';
@@ -183,7 +170,7 @@
                         content_table += '<tr>';
                         content_table += '<th class="text-center" scope="row">' + (key + 1) +'</th>';
                         content_table += '<td> ' + value.ten_danh_muc +' </td>';
-                        content_table += '<td> ' + ten_danh_muc_cha + ' </td>';
+                        // content_table += '<td> ' + ten_danh_muc_cha + ' </td>';
                         content_table += '<td class="text-center">';
                         content_table += '<button data-id="'+ value.id +'" class="doiTrangThai btn '+ class_button +'">';
                         content_table +=  text_button;
@@ -227,14 +214,14 @@
             var val_ten_danh_muc    = $("#ten_danh_muc").val();
             var val_slug_danh_muc   = $("#slug_danh_muc").val();
 
-            var val_id_danh_muc_cha = $("#id_danh_muc_cha").val();
+            // var val_id_danh_muc_cha = $("#id_danh_muc_cha").val();
             var val_is_open         = $("#is_open").val();
 
             var payload = {
                 'ten_danh_muc'      :   val_ten_danh_muc,
                 'slug_danh_muc'     :   val_slug_danh_muc,
 
-                'id_danh_muc_cha'   :   val_id_danh_muc_cha,
+                // 'id_danh_muc_cha'   :   val_id_danh_muc_cha,
                 'is_open'           :   val_is_open,
             };
 
@@ -278,6 +265,7 @@
                     } else {
                         toastr.error('Vui lòng không can thiệp hệ thống!');
                     }
+                     loadTable();
                 },
             });
         });
@@ -311,7 +299,7 @@
                     if(res.status) {
                         $("#ten_danh_muc_edit").val(res.data.ten_danh_muc);
                         $("#slug_danh_muc_edit").val(res.data.slug_danh_muc);
-                        $("#id_danh_muc_cha_edit").val(res.data.id_danh_muc_cha);
+                        // $("#id_danh_muc_cha_edit").val(res.data.id_danh_muc_cha);
                         $("#is_open_edit").val(res.data.is_open);
                         $("#id_edit").val(res.data.id);
                     } else {
@@ -328,13 +316,13 @@
             var val_ten_danh_muc    = $("#ten_danh_muc_edit").val();
             var val_slug_danh_muc   = $("#slug_danh_muc_edit").val();
 
-            var val_id_danh_muc_cha = $("#id_danh_muc_cha_edit").val();
+            // var val_id_danh_muc_cha = $("#id_danh_muc_cha_edit").val();
             var val_is_open         = $("#is_open_edit").val();
             var val_id              = $("#id_edit").val();
             var payload = {
                 'ten_danh_muc'      :   val_ten_danh_muc,
                 'slug_danh_muc'     :   val_slug_danh_muc,
-                'id_danh_muc_cha'   :   val_id_danh_muc_cha,
+                // 'id_danh_muc_cha'   :   val_id_danh_muc_cha,
                 'is_open'           :   val_is_open,
                 'id'                :   val_id,
             };

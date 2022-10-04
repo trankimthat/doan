@@ -53,9 +53,9 @@
                                 <span>Tổng tiền thực trả: <span id="tongTienThucTra" class="text-danger font-weight-bold"></span></span>
                             </div>
                         </div>
-                        <div class="cart float-md-right text-md-right" class="wc-proceed-to-checkout">
-                            <input type="hidden" id="id_ban_thanh_toan">
-                            <a id="inBill" class="btn btn-danger" href="#" >INVOICE</a>
+                        <div class="cart float-md-right text-md-right">
+                            <input hidden id="id_ban_thanh_toan">
+                            <button id="inBill" class="btn btn-danger">INVOICE</button>
                         </div>
                     </div>
 
@@ -74,12 +74,13 @@
     })
   </script>
   <script>
-       $(document).ready(function() {
+        $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             function loadtableLeft(){
                 $.ajax({
                     url     :   '/admin/hoa-don/page-ban',
@@ -94,7 +95,7 @@
                             var text_button  = 'Bàn Đầy';
                             var class_button = 'btn-danger';
                             }
-                            if(value.xuat_hoa_don){
+                            if(value.xuat_hoa_don == 0){
                                 var class_a = 'btn-danger';
                                 var text    = 'Đã oder'
                             }else{
@@ -103,9 +104,9 @@
                             }
                             content_table += '<div class="row col-md-3 ">'
                             content_table += '<div class="col-md-12">';
-                            content_table += '<div class="card bg-primary text-white">';
+                            content_table += '<div class="card bg-primary  text-white">';
                             content_table += '<div class="card-body text-center">';
-                            content_table += '<a data-id="'+ value.id +'" class="table" style="font-size: 50px">';
+                            content_table += '<a data-idban="'+ value.id +'" class="table" style="font-size: 50px">';
                             content_table += '<b>'+ value.ma_ban +'</b>';
                             content_table += '</a>';
                             content_table += '</div>';
@@ -123,7 +124,9 @@
                     }
                     });
             }
+
             loadtableLeft();
+
             function loadTableRight(id){
                 $.ajax({
                     url     :   '/admin/hoa-don/data/'+ id,
@@ -135,6 +138,7 @@
                         var tongTienTra = 0;
                         var ma_ban = '';
                         $("#id_ban_thanh_toan").val(id);
+                        // console.log($hihi);
                         $.each(res.dulieu, function(key, value) {
                         content_table += '<tr>';
                         content_table += '<th class="text-center" scope="row">' + (key + 1) +'</th>';
@@ -159,67 +163,69 @@
                 });
             }
 
-            function formatNumber(number)
-            {
-            return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
+            function formatNumber(number){
+                return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
             }
+
             $('body').on('click','.doiTrangThai',function(){
-            var id = $(this).data('idtrangthai');
-            var self = $(this);
-            // console.log(id);
-            $.ajax({
-                url     :     '/admin/ban/doi-trang-thai/' + id,
-                type    :     'get',
-                success :     function(res) {
-                    if(res.trangThai) {
-                        toastr.success('Đã đổi trạng thái thành công!');
-                        // Tình trạng mới là true
-                        loadtableLeft();
-                        if(res.tinhTrangDanhMuc == true){
-                            self.html('Bàn Trống');
-                            self.removeClass('btn-danger');
-                            self.addClass('btn-primary');
-                        } else {
-                            self.html('Bàn Đầy');
-                            self.removeClass('btn-primary');
-                            self.addClass('btn-danger');
-                        }
-                    } else {
-                        toastr.error('Vui lòng không can thiệp hệ thống!');
-                    }
-                },
-            });
-            });
-            $('body').on('click','.table',function(){
-                    var id = $(this).data('id');
-                    $.ajax({
-                        url     :   '/admin/hoa-don/ban/' + id,
-                        type    :   'get',
-                        success :   function(res) {
-                            if(res.status) {
-                                loadTableRight(id);
+                var id = $(this).data('idtrangthai');
+                var self = $(this);
+                $.ajax({
+                    url     :     '/admin/ban/doi-trang-thai/' + id,
+                    type    :     'get',
+                    success :     function(res) {
+                        if(res.trangThai) {
+                            toastr.success('Đã đổi trạng thái thành công!');
+                            // Tình trạng mới là true
+                            loadtableLeft();
+                            if(res.tinhTrangDanhMuc == true){
+                                self.html('Bàn Trống');
+                                self.removeClass('btn-danger');
+                                self.addClass('btn-primary');
                             } else {
-                                toastr.error(' Bàn không tồn tại!');
+                                self.html('Bàn Đầy');
+                                self.removeClass('btn-primary');
+                                self.addClass('btn-danger');
                             }
-                        },
-                    });
-            });
-           $('#inBill').click(function(){
-            var id = $("#id_ban_thanh_toan").val();
-            $.ajax({
-                url     :'/admin/hoa-don/in-bill/'+ id,
-                type    : 'get',
-                success : function(res) {
-                    if(res.status == 1){
-                        toastr.success("Đã in bill thành công!");
-                        loadTableRight();
-                    }else{
-                        toastr.warning("Bill Rỗng !")
-                    }
-                },
-            });
-           });
-        });
+                        } else {
+                            toastr.error('Vui lòng không can thiệp hệ thống!');
+                        }
+                    },
+                });
+            })
+
+            $('body').on('click','.table',function(){
+                var id = $(this).data('idban');
+                $.ajax({
+                    url     :   '/admin/hoa-don/ban/' + id,
+                    type    :   'get',
+                    success :   function(res) {
+                        if(res.status) {
+                            loadTableRight(id);
+                        } else {
+                            toastr.error(' Bàn không tồn tại!');
+                        }
+                    },
+                });
+            })
+
+            $('body').on('click','#inBill',function(){
+                var id = $("#id_ban_thanh_toan").val();
+                // console.log(id);
+                $.ajax({
+                    url     :'/admin/hoa-don/in-bill/'+ id,
+                    type    : 'post',
+                    success : function(res) {
+                        if(res.status == 1){
+                            toastr.success("Đã in bill thành công!");
+                            loadTableRight();
+                        }else{
+                            toastr.warning("Bill Rỗng !")
+                        }
+                    },
+                });
+            })
+        })
   </script>
 @endsection
 

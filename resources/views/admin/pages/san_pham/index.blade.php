@@ -453,7 +453,7 @@
                 'is_open'           :   val_is_open,
                 'id'                :   val_id,
             };
-            console.log(payload);
+            // console.log(payload);
 
             // Gửi payload lên trên back-end bằng con đường ajax
             $.ajax({

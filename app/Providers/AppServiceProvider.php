@@ -24,12 +24,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $menuCha = DanhMucSanPham::where('id_danh_muc_cha', 0)
-                                 ->where('is_open', 1)
+        $menuCha = DanhMucSanPham::
+                                 where('is_open', 1)
                                  ->get();
-        $menuCon = DanhMucSanPham::where('id_danh_muc_cha', '<>', 0)
-                                 ->where('is_open', 1)
-                                 ->get();
+
+
+
+        // $menuCon = DanhMucSanPham::where('id_danh_muc_cha', '<>', 0)
+        //                          ->where('is_open', 1)
+        //                          ->get();
 
         // foreach($menuCha as $key => $value_cha) {
         //     $value_cha->tmp = $value_cha->id;
@@ -40,16 +43,20 @@ class AppServiceProvider extends ServiceProvider
         //     }
         // }
 
-        //  foreach($menuCha as $key => $value_cha) {
-        //     $value_cha->tmp = $value_cha->id;
-            foreach($menuCon as $key => $value_con) {
-                if($value_con->id_danh_muc_cha) {
-                    $value_con->tmp =  $value_con->tmp . ', ' . $value_con->id;
-                }
-            }
-        // }
+
+         foreach($menuCha as $key => $value_cha) {
+            $value_cha->tmp = $value_cha->id;
+
+
+
+            // foreach($menuCon as $key => $value_con) {
+            //     if($value_con->id_danh_muc_cha) {
+            //         $value_con->tmp =  $value_con->tmp . ', ' . $value_con->id;
+            //     }
+            // }
+         }
         view()->share('menuCha', $menuCha);
-        view()->share('menuCon', $menuCon);
+        // view()->share('menuCon', $menuCon);
     }
 }
 

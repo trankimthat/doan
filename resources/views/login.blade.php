@@ -18,6 +18,22 @@
             background: rgba(0,0,0,0);
             border: none;
         }
+        .button-1{
+            padding: 0px 15px;
+        }
+        .button-2{
+            padding: 0px 25px;
+        }
+        .mx-1.mx-md-4{
+            margin-top: 30px;
+            text-align: center;
+        }
+        #login-2 {
+        padding: 15px 30px;
+        }
+        #login-1 {
+        padding: 15px 22px;
+        }
     </style>
 </head>
 
@@ -37,31 +53,26 @@
                                         <div class="d-flex flex-row align-items-center mb-2">
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <input type="email" id="email" class="form-control" />
-                                                <label class="form-label"><b>Email</b></label>
+                                                <a href="/admin/index">
+                                                    <button id="login-1" type="button"
+                                                        class="btn btn-dark btn-lg">Admin
+                                                    </button>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="d-flex flex-row align-items-center mb-2">
                                             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <input type="password" id="password" class="form-control" />
-                                                <label class="form-label"><b>Mật Khẩu</b></label>
+                                                <a href="/user">
+                                                    <button id="login-2" type="button"
+                                                        class="btn btn-dark btn-lg">User
+                                                    </button>
+                                                </a>
                                             </div>
-                                        </div>
-                                        <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4">
-                                            <button id="login" type="button"
-                                                class="btn btn-dark btn-lg">Login
-                                            </button>
                                         </div>
                                     </form>
 
                                 </div>
-                                {{-- <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-
-                                    <img src="https://hipbcoffee.com:8443/storage/public/12161-1602822113.jpg"
-                                        class="img-fluid" alt="Sample image">
-
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -75,50 +86,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(e) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $("#login").click(function(e) {
-                e.preventDefault();
-                var email = $("#email").val();
-                var password = $("#password").val();
-                var payload = {
-                    'email'     : email,
-                    'password'  : password,
-                };
-                $.ajax({
-                    url     :   '/login',
-                    data    :   payload,
-                    type    :   'post',
-                    success :   function(res) {
-                        if(res.status == 2) {
-                            toastr.success('Bạn đã login thành công!');
-                            setTimeout(function(){
-                                $(location).attr('href','http://127.0.0.1:8000/user/ban/index');
-                            }, 2000);
-
-                        } else if(res.status == 1) {
-                            toastr.warning("Đăng nhập thất bại");
-                        }
-                         else {
-                            toastr.error("Đăng nhập thất bại!");
-                        }
-                    },
-                    error   :   function(res) {
-                        var danh_sach_loi = res.responseJSON.errors;
-                        $.each(danh_sach_loi, function(key, value){
-                            toastr.error(value[0]);
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>

@@ -58,7 +58,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <div class="content-wrapper">
         <div class="content-header row" >
-            <div class="content-header-left col-md-6 col-12 mb-2">
+            <div class="content-header-left col-md-12 mb-2">
                 @yield('title')
             </div>
             {{-- <div class="content-header-right col-md-6 col-12">

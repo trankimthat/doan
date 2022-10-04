@@ -15,9 +15,9 @@ class CreateKhosTable extends Migration
     {
         Schema::create('khos', function (Blueprint $table) {
             $table->id();
-            $table->string('id_danh_muc');
-            $table->string('ten_danh_muc');
-            $table->integer('so_luong');
+            $table->string('id_nguyen_lieu');
+            $table->string('ten_nguyen_lieu');
+            $table->integer('so_luong')->default(0);
             $table->integer('don_gia')->nullable();
             $table->integer('thanh_tien')->nullable();
             $table->integer('type')->default(0);

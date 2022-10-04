@@ -12,15 +12,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', function () {
+    return view('login');
+});
 Route::get('/home-page/{id}', [\App\Http\Controllers\HomePageController::class, 'index']);
 Route::get('/home-page/data/{id}', [\App\Http\Controllers\HomePageController::class, 'getData']);
-// Route::post('/search', [\App\Http\Controllers\HomePageController::class, 'search']);
-// Route::post('/getData', [\App\Http\Controllers\HomePageController::class, 'getData1']);
+
 
 Route::group(['prefix' => '/admin'], function() {
     // Route::post('/getData/{id}', [\App\Http\Controllers\DanhMucSanPhamController::class, 'getData1']);
     Route::get('/index', [\App\Http\Controllers\AdminController::class, 'index']);
+    Route::post('/login', [\App\Http\Controllers\AdminController::class, 'loginAdmin']);
+    Route::get('/logout', [\App\Http\Controllers\AdminController::class, 'logout']);
     Route::group(['prefix' => '/danh-muc-san-pham'], function() {
         Route::get('/index', [\App\Http\Controllers\DanhMucSanPhamController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\DanhMucSanPhamController::class, 'store']);
@@ -31,7 +34,7 @@ Route::group(['prefix' => '/admin'], function() {
         Route::get('/delete/{id}', [\App\Http\Controllers\DanhMucSanPhamController::class, 'destroy']);
         Route::get('/edit/{id}', [\App\Http\Controllers\DanhMucSanPhamController::class, 'edit']);
         Route::post('/update', [\App\Http\Controllers\DanhMucSanPhamController::class, 'update']);
-        Route::post('/search', [\App\Http\Controllers\DanhMucSanPhamController::class, 'search']);
+        // Route::post('/search', [\App\Http\Controllers\DanhMucSanPhamController::class, 'search']);
     });
      Route::group(['prefix' => '/san-pham'], function() {
         Route::get('/index', [\App\Http\Controllers\SanPhamController::class, 'index']);
@@ -44,7 +47,7 @@ Route::group(['prefix' => '/admin'], function() {
 
         Route::get('/edit/{id}', [\App\Http\Controllers\SanPhamController::class, 'editSanPham']);
         Route::post('/update', [\App\Http\Controllers\SanPhamController::class, 'updateSanPham']);
-        // Route::post('/search/{id}', [\App\Http\Controllers\SanPhamController::class, 'search']);
+        // Route::post('/search', [\App\Http\Controllers\SanPhamController::class, 'search']);
 
     });
     Route::group(['prefix' => '/ban'], function() {
@@ -78,26 +81,47 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/updateprice', [\App\Http\Controllers\KhoController::class, 'updateprice']);
         Route::get('/createnhapkho', [\App\Http\Controllers\KhoController::class, 'create']);
 
+        //xuất khogetData
     });
+
+    Route::group(['prefix' => '/xuat-kho'], function() {
+        Route::get('/index', [\App\Http\Controllers\XuatKhoController::class, 'index']);
+        Route::get('/data', [\App\Http\Controllers\XuatKhoController::class, 'dataXuat']);
+        Route::post('/create', [\App\Http\Controllers\XuatKhoController::class, 'store']);
+        Route::get('/data/table-xuat', [\App\Http\Controllers\XuatKhoController::class, 'getData']);
+    });
+
     Route::group(['prefix' => '/hoa-don'], function() {
         Route::get('/index', [\App\Http\Controllers\HoaDonController::class, 'index']);
         Route::get('/data/{id}', [\App\Http\Controllers\HoaDonController::class, 'getData']);
         Route::get('/page-ban', [\App\Http\Controllers\HoaDonController::class, 'banData']);
         Route::get('/ban/{id}', [\App\Http\Controllers\HoaDonController::class, 'ban']);
-        Route::get('/in-bill/{id}', [\App\Http\Controllers\HoaDonController::class, 'store']);
+        Route::post('/in-bill/{id}', [\App\Http\Controllers\HoaDonController::class, 'store']);
     });
-    Route::group(['prefix' => '/hoa-don/ngay'], function() {
+    Route::group(['prefix' => '/doanh-thu'], function() {
         Route::get('/index', [\App\Http\Controllers\HoaDonController::class, 'page']);
-        Route::get('/data', [\App\Http\Controllers\HoaDonController::class, 'TongHD']);
+        Route::post('/data', [\App\Http\Controllers\HoaDonController::class, 'TongHD']);
+    });
+    Route::group(['prefix' => '/nguyen-lieu'], function() {
+        Route::get('/index', [\App\Http\Controllers\NguyenLieuController::class, 'index']);
+        Route::post('/index', [\App\Http\Controllers\NguyenLieuController::class, 'store']);
+        Route::get('/data', [\App\Http\Controllers\NguyenLieuController::class, 'getData']);
+        Route::get('/doi-trang-thai/{id}', [\App\Http\Controllers\NguyenLieuController::class, 'doiTrangThai']);
+        Route::get('/delete/{id}', [\App\Http\Controllers\NguyenLieuController::class, 'destroy']);
+        Route::get('/edit/{id}', [\App\Http\Controllers\NguyenLieuController::class, 'edit']);
+        Route::post('/update', [\App\Http\Controllers\NguyenLieuController::class, 'update']);
+
+        Route::post('/search', [\App\Http\Controllers\NguyenLieuController::class, 'search']);
+
     });
 });
 
-        Route::get('/', [\App\Http\Controllers\AgentController::class, 'login']);
+        Route::get('/user', [\App\Http\Controllers\AgentController::class, 'login']);
         Route::post('/login', [\App\Http\Controllers\AgentController::class, 'loginAction']);
         Route::get('/logout', [\App\Http\Controllers\AgentController::class, 'logout']);
 
         Route::group(['prefix' => '/user'], function() {
-        // Route::get('/oder/index', [\App\Http\Controllers\DonHangController::class, 'index']);
+            // Route::get('/oder/index', [\App\Http\Controllers\DonHangController::class, 'index']);
             Route::get('/ban/index', [\App\Http\Controllers\BanUserController::class, 'index']);
             Route::get('/data', [\App\Http\Controllers\BanUserController::class, 'getData']);
             Route::get('/ban/doi-trang-thai/{id}', [\App\Http\Controllers\BanUserController::class, 'doiTrangThai']);
@@ -109,3 +133,4 @@ Route::group(['prefix' => '/admin'], function() {
             Route::get('/remove-cart/{id}', [\App\Http\Controllers\ChiTietHoaDonController::class, 'removeCart']);
             Route::get('/create-bill/{id}', [\App\Http\Controllers\DonHangController::class, 'store']);
 });
+

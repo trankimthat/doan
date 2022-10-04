@@ -24,7 +24,7 @@
             </div>
             <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: slideInRight;">
                 <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-                    @foreach ($menuCon as $key => $value)
+                    @foreach ($menuCha as $key => $value)
                     <li class="nav-item me-2">
                         <a   class="btn btn-outline-primary border-2 choose {{ $key == 0 ? 'active' : '' }}" data-bs-toggle="pill" href="#tab-{{$value->id}}">{{ $value->ten_danh_muc }}</a>
                     </li>
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="tab-content">
-            @foreach ($menuCon as $key => $value)
+            @foreach ($menuCha as $key => $value)
                 <div id="tab-{{$value->id}}" class="tab-pane fade {{ $key == 0 ? 'active show' : '' }}">
                     <div class="row g-4" >
                          @foreach ($allSanPham as $key_sp => $value_sp)
@@ -192,43 +192,43 @@
 
             // });
 
-            // $("#searchSanPham").keyup(function(){
-            //     var url = window.location.pathname;
-            //     var id = url.substr(11);
-            //     var search = $("#searchSanPham").val();
-            //     $payload = {
-            //         'tenSanPham': search,
-            //     };
-            //     $.ajax({
-            //         url: '/admin/san-pham/search',
-            //         type: 'post',
-            //         data: $payload,
-            //         success: function (res) {
-            //             var html = '';
-            //             $.each(res.dataProduct, function(key, value) {
-            //                 html +='<div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">';
-            //                 html +='<div class="product-item">';
-            //                 html +='<div class="position-relative bg-light overflow-hidden">';
-            //                 html +='<img class="img-fluid w-100" src="'+ value.anh_dai_dien +'" alt="">';
-            //                 html +='</div>';
-            //                 html +='<div class="text-center p-4">';
-            //                 html +='<a class="d-block h5 mb-2" href="">'+ value.ten_san_pham +'</a>';
-            //                 html +='<span class="text-primary me-1">'+ value.gia_khuyen_mai +'</span>';
-            //                 html +='<span class="text-body text-decoration-line-through">'+ value.gia_ban +'</span>';
-            //                 html +='</div>';
-            //                 html +='<div class="d-flex border-top" style="background-color: rgb(164, 160, 216)">';
-            //                 html +='<small class="w-50 text-center py-2" style="margin-left: 73px">';
-            //                 html +='<a  title="Add to Cart"  class="btn addToCart" style="font-size: 1.875em"  data-id="'+ value.id +'">ODER</a>';
-            //                 html +='</small>';
-            //                 html +='</div>';
-            //                 html +='</div>';
-            //                 html +='</div>';
-            //             });
-            //             $("#tablePage").html(html);
+            $("#searchSanPham").keyup(function(){
+                // var url = window.location.pathname;
+                // var id = url.substr(11);
+                var search = $("#searchSanPham").val();
+                $payload = {
+                    'tenSanPham': search,
+                };
+                $.ajax({
+                    url: '/admin/san-pham/search',
+                    type: 'post',
+                    data: $payload,
+                    success: function (res) {
+                        var html = '';
+                        $.each(res.dataProduct, function(key, value) {
+                            html +='<div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">';
+                            html +='<div class="product-item">';
+                            html +='<div class="position-relative bg-light overflow-hidden">';
+                            html +='<img class="img-fluid w-100" src="'+ value.anh_dai_dien +'" alt="">';
+                            html +='</div>';
+                            html +='<div class="text-center p-4">';
+                            html +='<a class="d-block h5 mb-2" href="">'+ value.ten_san_pham +'</a>';
+                            html +='<span class="text-primary me-1">'+ value.gia_khuyen_mai +'</span>';
+                            html +='<span class="text-body text-decoration-line-through">'+ value.gia_ban +'</span>';
+                            html +='</div>';
+                            html +='<div class="d-flex border-top" style="background-color: rgb(164, 160, 216)">';
+                            html +='<small class="w-50 text-center py-2" style="margin-left: 73px">';
+                            html +='<a  title="Add to Cart"  class="btn addToCart" style="font-size: 1.875em"  data-id="'+ value.id +'">ODER</a>';
+                            html +='</small>';
+                            html +='</div>';
+                            html +='</div>';
+                            html +='</div>';
+                        });
+                        $("#tablePage").html(html);
 
-            //         }
-            //     });
-            // });
+                    }
+                });
+            });
     });
     </script>
 

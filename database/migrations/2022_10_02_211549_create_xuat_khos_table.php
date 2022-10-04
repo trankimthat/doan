@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDanhMucSanPhamsTable extends Migration
+class CreateXuatKhosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateDanhMucSanPhamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('danh_muc_san_phams', function (Blueprint $table) {
+        Schema::create('xuat_khos', function (Blueprint $table) {
             $table->id();
-            $table->string('ten_danh_muc');
-            $table->string('slug_danh_muc');
-            $table->integer('is_delete')->default(0);
-            $table->integer('is_open');
+            $table->string('id_nguyen_lieu');
+            $table->string('ten_nguyen_lieu');
+            $table->integer('so_luong')->default(0);
+            // $table->string('don_vi');
+            $table->integer('type')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateDanhMucSanPhamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('danh_muc_san_phams');
+        Schema::dropIfExists('xuat_khos');
     }
 }

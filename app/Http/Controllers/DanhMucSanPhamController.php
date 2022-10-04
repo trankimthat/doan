@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateDanhMucSanPhamRequest;
 use App\Http\Requests\UpdateDanhMucSanPhamRequest;
+use App\Models\Admin;
 use App\Models\SanPham;
+use Illuminate\Support\Facades\Auth;
 
 class DanhMucSanPhamController extends Controller
 {
@@ -15,22 +17,28 @@ class DanhMucSanPhamController extends Controller
     public function index()
 
     {
-        $list_danh_muc = DanhMucSanPham::where('is_open', 1)->get();
-        $danh_muc_cha = DanhMucSanPham::where('is_open', 1)->where('id_danh_muc_cha', 0)->orWhereNull('id_danh_muc_cha')->get();
-        return view('admin.pages.danh_muc_san_pham.index', compact('list_danh_muc', 'danh_muc_cha'));
+        $check = Auth::guard('Admin')->user();
+        if($check){
+        // $list_danh_muc = DanhMucSanPham::where('is_open', 1)->get();
+        // $danh_muc_cha = DanhMucSanPham::where('is_open', 1)->where('id_danh_muc_cha', 0)->orWhereNull('id_danh_muc_cha')->get();
+        return view('admin.pages.danh_muc_san_pham.index');
+        }else{
+            toastr()->error('Bạn cần phải đăng nhập');
+            return view('admin.login');
+        }
     }
 
     public function getData()
     {
-        $danh_muc_cha = DanhMucSanPham::where('id_danh_muc_cha', 0)->get();
+        $danh_muc_cha = DanhMucSanPham::all();
 
-        $sql = 'SELECT a.*, b.ten_danh_muc as `ten_danh_muc_cha`
-                FROM `danh_muc_san_phams` a LEFT JOIN `danh_muc_san_phams` b
-                on a.id_danh_muc_cha = b.id';
-        $data = DB::select($sql);
+        // $sql = 'SELECT a.*, b.ten_danh_muc as `ten_danh_muc_cha`
+        //         FROM `danh_muc_san_phams` a LEFT JOIN `danh_muc_san_phams` b
+        //         on a.id_danh_muc_cha = b.id';
+        // $data = DB::select($sql);
 
         return response()->json([
-            'list'          => $data,
+            // 'list'          => $data,
             'danh_muc_cha'  => $danh_muc_cha,
         ]);
         // $array = [ "id" => [1,2,3], "ten" => "tien","hoang","cs001"];
@@ -43,7 +51,7 @@ class DanhMucSanPhamController extends Controller
             'ten_danh_muc'      =>  $request->ten_danh_muc,
             'slug_danh_muc'     =>  $request->slug_danh_muc,
             'hinh_anh'          =>  $request->hinh_anh,
-            'id_danh_muc_cha'   =>  empty($request->id_danh_muc_cha) ? 0 : $request->id_danh_muc_cha,
+            // 'id_danh_muc_cha'   =>  empty($request->id_danh_muc_cha) ? 0 : $request->id_danh_muc_cha,
             'is_open'           =>  $request->is_open,
         ]);
 
@@ -103,14 +111,14 @@ class DanhMucSanPhamController extends Controller
         // dd($danh_muc->toArray());
         return response()->json(['status'=> true]);
     }
-    public function search(Request $request)
-    {
-        $data = DanhMucSanPham::where('ten_danh_muc', 'like', '%' . $request->tenDanhMuc .'%')
-                                ->where('id_danh_muc_cha', 0)
-                                ->get();
-        // dd($data);
-        return response()->json(['dataProduct' => $data]);
+    // public function search(Request $request)
+    // {
+    //     $data = DanhMucSanPham::where('ten_danh_muc', 'like', '%' . $request->tenDanhMuc .'%')
+    //                             ->where('id_danh_muc_cha', 0)
+    //                             ->get();
+    //     // dd($data);
+    //     return response()->json(['dataProduct' => $data]);
 
-    }
+    // }
 
 }

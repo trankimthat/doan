@@ -11,8 +11,8 @@ class Kho extends Model
     protected $table = 'khos';
 
     protected $fillable = [
-        'id_danh_muc',
-        'ten_danh_muc',
+        'id_nguyen_lieu',
+        'ten_nguyen_lieu',
         'so_luong',
         'don_gia',
         'thanh_tien',

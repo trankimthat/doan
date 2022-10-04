@@ -50,8 +50,7 @@
                                         </div>
                                         <div class="d-flex justify-content-end mx-4 mb-3 mb-lg-4">
                                             <button id="login" type="button"
-                                                class="btn btn-dark btn-lg">Login
-                                            </button>
+                                                class="btn btn-dark btn-lg">Login</button>
                                         </div>
                                     </form>
 
@@ -91,19 +90,17 @@
                     'email'     : email,
                     'password'  : password,
                 };
+                // console.log(payload);
                 $.ajax({
-                    url     :   '/login',
+                    url     :   '/admin/login',
                     data    :   payload,
                     type    :   'post',
                     success :   function(res) {
-                        if(res.status == 2) {
+                        if(res.status == 1) {
                             toastr.success('Bạn đã login thành công!');
                             setTimeout(function(){
-                                $(location).attr('href','http://127.0.0.1:8000/user/ban/index');
+                                $(location).attr('href','http://127.0.0.1:8000/admin/danh-muc-san-pham/index');
                             }, 2000);
-
-                        } else if(res.status == 1) {
-                            toastr.warning("Đăng nhập thất bại");
                         }
                          else {
                             toastr.error("Đăng nhập thất bại!");

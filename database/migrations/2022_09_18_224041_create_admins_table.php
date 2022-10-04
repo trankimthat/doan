@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDanhMucSanPhamsTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateDanhMucSanPhamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('danh_muc_san_phams', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('ten_danh_muc');
-            $table->string('slug_danh_muc');
-            $table->integer('is_delete')->default(0);
-            $table->integer('is_open');
+            $table->string('ho_va_ten');
+            $table->string('so_dien_thoai');
+            $table->string('email');
+            $table->string('password');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateDanhMucSanPhamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('danh_muc_san_phams');
+        Schema::dropIfExists('admins');
     }
 }

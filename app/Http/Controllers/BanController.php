@@ -6,6 +6,7 @@ use App\Http\Requests\BanRequest;
 use App\Models\Ban;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BanController extends Controller
@@ -17,7 +18,13 @@ class BanController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.ban.index');
+        $check = Auth::guard('Admin')->user();
+        if($check){
+            return view('admin.pages.ban.index');
+        }else{
+            toastr()->error('bạn cần phải đăng nhập');
+            return view('admin.login');
+        }
     }
 
     public function store(BanRequest $request)
@@ -33,7 +40,7 @@ class BanController extends Controller
     }
     public function getData()
     {
-        $data = Ban::all();
+        $data =Ban::all();
         return response()->json([
             'dulieu' => $data,
         ]);

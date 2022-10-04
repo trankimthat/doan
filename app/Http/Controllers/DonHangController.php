@@ -34,6 +34,7 @@ class DonHangController extends Controller
                         'agent_id'      => $agent->id,
                         'loai_thanh_toan'   => 1,
                         'xuat_hoa_don'      => 1,
+                        'ngay_hoa_don'      =>date('Y-m-d'),
                     ]);
                     $thuc_tra = 0; $tong_tien = 0;
                     foreach($giohang as $key => $value) {

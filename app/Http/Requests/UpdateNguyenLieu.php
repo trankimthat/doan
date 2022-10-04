@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateDanhMucSanPhamRequest extends FormRequest
+class UpdateNguyenLieu extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class CreateDanhMucSanPhamRequest extends FormRequest
     public function rules()
     {
         return [
-            'ten_danh_muc'      =>  'required|max:50|unique:danh_muc_san_phams,ten_danh_muc',
-            'slug_danh_muc'     =>  'required|max:50|unique:danh_muc_san_phams,slug_danh_muc',
-            // 'id_danh_muc_cha'   =>  'nullable|exists:danh_muc_san_phams,id',
+            'ten_nguyen_lieu'      =>  'required|max:50|unique:nguyen_lieus,ten_nguyen_lieu,'.$this->id,
+            'slug_nguyen_lieu'     =>  'required|max:50|unique:nguyen_lieus,slug_nguyen_lieu,'.$this->id,
             'is_open'           =>  'required|boolean',
+            'id'                =>  'required|exists:nguyen_lieus,id',
         ];
     }
     public function messages()
@@ -40,13 +40,12 @@ class CreateDanhMucSanPhamRequest extends FormRequest
             'unique'        =>  ':attribute đã tồn tại',
         ];
     }
-
     public function attributes()
     {
         return [
-            'ten_danh_muc'      =>  'Tên danh mục',
-            'slug_danh_muc'     =>  'Slug danh mục',
-            // 'id_danh_muc_cha'   =>  'Danh mục cha',
+            'id'                =>  'Danh mục nguyên liệu',
+            'ten_nguyen_lieu'      =>  'Tên nguyên liệu',
+            'slug_nguyen_lieu'     =>  'Slug nguyên liệu',
             'is_open'           =>  'Tình trạng',
         ];
     }

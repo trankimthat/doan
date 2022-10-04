@@ -43,13 +43,19 @@
               </li>
               <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/ban/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Lý Bàn</span></a>
               </li>
-              <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/kho/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Lý Kho</span></a>
+              <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/nguyen-lieu/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Lý Nguyên Liệu</span></a>
+              </li>
+              <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/kho/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Lý Nhập Kho</span></a>
+              </li>
+              <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/xuat-kho/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Lý Xuất Kho</span></a>
               </li>
               <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/hoa-don/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Lý Hóa Đơn</span></a>
               </li>
               <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/user/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản Tài Khoản Nhân Viên</span></a>
               </li>
               <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/user/dangki" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Đăng Kí Tài Khoản Nhân Viên</span></a>
+              </li>
+              <li class="active" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/doanh-thu/index" data-toggle="dropdown" data-i18n="eCommerce"><span data-i18n="eCommerce">Quản lý doanh thu</span></a>
               </li>
             </ul>
           </li>
