@@ -98,6 +98,7 @@ class KhoController extends Controller
             $khoHang->so_luong = $request->so_luong;
             if($khoHang->so_luong > 0){
                 $khoHang->save();
+                
                 return response()->json(['status' => true]);
             }else{
                 return response()->json(['status' => false]);

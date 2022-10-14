@@ -87,75 +87,6 @@
         </div>
     </div>
 </div>
-{{-- <div style="text-align: center">
-    <h3 style="color: red">Quản Lý Xuất Kho</h3>
-</div> --}}
-{{-- <div class="row">
-    <div class="col-md-6">
-        <div class="table-response">
-            <div class="main-card mb-3 card">
-                <div class="card-body"><h5 class="card-title">Table bordered</h5>
-                    <table class="mb-0 table table-bordered" id="tableXuatKho">
-                        <thead>
-                        <tr>
-                            <th class="text-nowrap text-center">#</th>
-                            <th class="text-nowrap text-center">Tên Nguyên Liệu</th>
-                            <th class="text-nowrap text-center">Số Lượng</th>
-                            <th class="text-nowrap text-center">Đơn Vị</th>
-                            <th class="text-nowrap text-center">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header" style="height: auto">
-                <h4 class="card-title">Nhập Kho Nguyên Liệu</h4>
-                <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-                    <ul class="list-inline mb-0">
-                        <li><a data-action="collapse"><i class="feather icon-minus"></i></a></li>
-                        <li><a data-action="reload"><i class="feather icon-rotate-cw"></i></a></li>
-                        <li><a data-action="expand"><i class="feather icon-maximize"></i></a></li>
-                        <li><a data-action="close"><i class="feather icon-x"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-content collapse show">
-                <div class="card-header">
-                    <h5>Chi Tiết Hóa Đơn Nhập Hàng</h5>
-                    <span>Tổng tiền hàng: <span id="tongTien" class="text-danger font-weight-bold"></span></span>
-                    <span>Tổng số sản phẩm: <span id="tongSanPham" class="text-danger font-weight-bold"></span></span>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered mb-0" id="tableXuatBenPhai">
-                        <thead>
-                            <tr class="text-center">
-                                <th class="text-center">#</th>
-                                <th class="text-center">Tên Sản Phẩm</th>
-                                <th class="text-center">Số Lượng</th>
-                                <th class="text-center">Đơn Vị</th>
-                                <th class="text-center">Đơn Giá</th>
-                                <th class="text-center">Thành Tiền</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <button id="creatNhapKho" class="m-1 btn btn-primary">Nhập Kho</button>
-        </div>
-    </div>
-</div> --}}
 @endsection
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -356,7 +287,7 @@
                     if(res.status){
                         toastr.success("Đã nhập kho danh mục !");
                         tableBenPhai();
-                        tableXuatKho();
+                        // tableXuatKho();
                     }else{
                         toastr.error("không có đơn giá/số lượng danh mục sản phẩm nào !");
                         // tableBenPhai();
@@ -385,65 +316,6 @@
                 },
             });
         });
-
-        //Xuất Kho
-        // function tableXuatKho(){
-        //     console.log(123);
-        //     $.ajax({
-        //         url     :   '/admin/kho/xuat-kho/data',
-        //         type    :   'get',
-        //         success :   function(res) {
-        //             var html = '';
-        //             // console.log(res.dataXuat);
-        //             $.each(res.dataXuat, function(key, value) {
-
-        //                 html += '<tr>';
-        //                 html += '<th scope="row">' + (key + 1) + '</th>';
-        //                 html += '<td>' + value.ten_nguyen_lieu + '</td>';
-        //                 html += '<td>' + value.so_luong + '</td>';
-        //                 html += '<td>' + value.don_vi + '</td>';
-        //                 html += '<td>';
-        //                 html += '<button data-idXuat="' + value.id + '" class="btn btn-info btn-sm add">Add</button>';
-        //                 html += '</td>';
-        //                 html += '</tr>';
-        //             });
-        //             $("#tableXuatKho tbody").html(html);
-        //             console.log(html);
-        //         },
-        //     });
-        // }
-        // tableXuatKho();
-        // function tableXuatBenPhai(){
-        //     $.ajax({
-        //         url     :   '/admin/kho/data',
-        //         type    :   'get',
-        //         success :   function(res) {
-        //             var html = '';
-
-        //             $.each(res.nhapKho, function(key, value) {
-
-        //                 html += '<tr>';
-        //                 html += '<th scope="row">' + (key + 1) + '</th>';
-
-        //                 html += '<td>' + value.ten_nguyen_lieu + '</td>';
-        //                 html += '<td>';
-        //                 html += '<input type="number" min=1 class="form-control qty" value="'+value.so_luong+'" data-id='+ value.id+'>';
-        //                 html += '</td>';
-        //                 html += '<td>' + value.don_vi + '</td>';
-        //                 html += '<td>';
-        //                 html += '<input type="number" class="form-control price" value="'+value.don_gia +'" data-id='+ value.id+'>';
-        //                 html += '</td>';
-        //                 html += '<td>'+ formatNumber(value.so_luong * value.don_gia) +'</td>';
-        //                 html += '<td>';
-        //                 html += '<button class="btn btn-danger delete mr-1" data-iddelete="'+ value.id +'" data-toggle="modal" data-target="#deleteModal">Delete</button>';
-        //                 html += '</td>';
-        //                 html += '</tr>';
-        //             });
-        //             $("#tableXuatBenPhai tbody").html(html);
-
-        //         },
-        //     });
-        // }
 
     });
 

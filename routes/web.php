@@ -47,7 +47,9 @@ Route::group(['prefix' => '/admin'], function() {
 
         Route::get('/edit/{id}', [\App\Http\Controllers\SanPhamController::class, 'editSanPham']);
         Route::post('/update', [\App\Http\Controllers\SanPhamController::class, 'updateSanPham']);
-        // Route::post('/search', [\App\Http\Controllers\SanPhamController::class, 'search']);
+
+
+        Route::post('/search', [\App\Http\Controllers\SanPhamController::class, 'search']);
 
     });
     Route::group(['prefix' => '/ban'], function() {
@@ -89,8 +91,11 @@ Route::group(['prefix' => '/admin'], function() {
         Route::get('/data', [\App\Http\Controllers\XuatKhoController::class, 'dataXuat']);
         Route::post('/create', [\App\Http\Controllers\XuatKhoController::class, 'store']);
         Route::get('/data/table-xuat', [\App\Http\Controllers\XuatKhoController::class, 'getData']);
+        Route::get('/delete/{id}', [\App\Http\Controllers\XuatKhoController::class, 'destroy']);
+        Route::post('/updateqty', [\App\Http\Controllers\XuatKhoController::class, 'updateqty']);
+        Route::get('/create-xuat-kho', [\App\Http\Controllers\XuatKhoController::class, 'create']);
     });
-
+    /// quản lý in hóa đơn
     Route::group(['prefix' => '/hoa-don'], function() {
         Route::get('/index', [\App\Http\Controllers\HoaDonController::class, 'index']);
         Route::get('/data/{id}', [\App\Http\Controllers\HoaDonController::class, 'getData']);
@@ -98,9 +103,16 @@ Route::group(['prefix' => '/admin'], function() {
         Route::get('/ban/{id}', [\App\Http\Controllers\HoaDonController::class, 'ban']);
         Route::post('/in-bill/{id}', [\App\Http\Controllers\HoaDonController::class, 'store']);
     });
+
+    //Quản lý hóa đơn trong ngày
     Route::group(['prefix' => '/doanh-thu'], function() {
         Route::get('/index', [\App\Http\Controllers\HoaDonController::class, 'page']);
         Route::post('/data', [\App\Http\Controllers\HoaDonController::class, 'TongHD']);
+        Route::get('/hoa-don/{id}', [\App\Http\Controllers\HoaDonController::class, 'HoaDon']);
+        Route::post('/search', [\App\Http\Controllers\HoaDonController::class, 'search']);
+        Route::post('/updateqty', [\App\Http\Controllers\HoaDonController::class, 'updateqty']);
+        Route::get('/ngay-hoa-don/{id}', [\App\Http\Controllers\HoaDonController::class, 'ngayHoaDon']);
+        Route::get('/delete/{id}', [\App\Http\Controllers\HoaDonController::class, 'destroy']);
     });
     Route::group(['prefix' => '/nguyen-lieu'], function() {
         Route::get('/index', [\App\Http\Controllers\NguyenLieuController::class, 'index']);

@@ -246,17 +246,10 @@
         filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
         filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
     };
-    CKEDITOR.replace('mo_ta_chi_tiet', options);
-    CKEDITOR.replace('mo_ta_chi_tiet_edit', options);
+    // CKEDITOR.replace('mo_ta_chi_tiet', options);
+    // CKEDITOR.replace('mo_ta_chi_tiet_edit', options);
 </script>
 
-<script>
-    @if(count($errors) > 0)
-        @foreach ($errors->all() as $error)
-            toastr.error("{{ $error }}");
-        @endforeach
-    @endif
-</script>
 
 <script>
     $(document).ready(function(){

@@ -16,6 +16,8 @@
             <div class="card-body" style="text-align: center"><h5 class="card-title">HÓA ĐƠN</h5>
                 <div >
                     <h3 id="maBan"></h3>
+                    <h2>Nhân Viên</h2>
+                    <h2 style="color: red" id="tenNhanVien"></h2>
                 </div>
                 <table class="mb-0 table table-bordered" id="tableBanRight">
                     <thead>
@@ -37,7 +39,7 @@
                     <div class="cart_totals ">
                         <h1>Cart Totals</h1>
                         <div class="row">
-                            <div class="cart float-md-left text-md-left" id="TongTienHang " style="margin-bottom: 20px; font-size: 30px">
+                            <div class="cart float-md-left text-md-left"  style="margin-bottom: 20px; font-size: 30px">
                                 <span>Tổng tiền hàng: <span id="tongTien" class="text-danger font-weight-bold"></span></span>
                               </div>
                         </div>
@@ -54,7 +56,7 @@
                             </div>
                         </div>
                         <div class="cart float-md-right text-md-right">
-                            <input hidden id="id_ban_thanh_toan">
+                            <input hidden  id="id_ban_thanh_toan">
                             <button id="inBill" class="btn btn-danger">INVOICE</button>
                         </div>
                     </div>
@@ -133,10 +135,11 @@
                     type    :   'get',
                     success :   function(res) {
                         var content_table = '';
-                        var tongtienthuc = 0;
+                        var tongTien = 0;
                         var tongTienGiam = 0;
-                        var tongTienTra = 0;
+                        var tongTienThucTra = 0;
                         var ma_ban = '';
+                        var ten_nhan_vien = '';
                         $("#id_ban_thanh_toan").val(id);
                         // console.log($hihi);
                         $.each(res.dulieu, function(key, value) {
@@ -148,17 +151,18 @@
                         content_table += '<td> ' + value.so_luong * value.don_gia + ' </td>';
                         content_table += '</td>';
                         content_table += '</tr>';
-                        tongtienthuc = value.tong_tien;
-                        tongTienTra = value.thuc_tra;
+                        tongTien =  value.tong_tien;
                         tongTienGiam = value.tien_giam_gia;
+                        tongTienThucTra =  value.thuc_tra;
                         ma_ban = value.ma_ban;
+                        ten_nhan_vien = value.ho_va_ten
                         });
                         $("#tableBanRight tbody").html(content_table);
-                        $("#tongTien").text(formatNumber(tongtienthuc));
+                        $("#tongTien").text(formatNumber(tongTien));
                         $("#tongTienGiam").text(formatNumber(tongTienGiam));
-                        $("#tongTienThucTra").text(formatNumber(tongTienTra));
+                        $("#tongTienThucTra").text(formatNumber(tongTienThucTra));
                         $("#maBan").text(ma_ban);
-
+                        $("#tenNhanVien").text(ten_nhan_vien);
                     }
                 });
             }
