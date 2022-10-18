@@ -27,10 +27,13 @@ class SanPhamController extends Controller
 
     public function HamTaoSanPhamDayNe(KiemTraDuLieuTaoSanPham $bienNhanDuLieu)
     {
+        $check = Auth::guard('Admin')->user();
+        if($check){
         $data = $bienNhanDuLieu->all();
         SanPham::create($data);
 
         return response()->json(['thongBao' => 1235]);
+        }
     }
 
     public function getData()

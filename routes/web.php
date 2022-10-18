@@ -113,6 +113,7 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/updateqty', [\App\Http\Controllers\HoaDonController::class, 'updateqty']);
         Route::get('/ngay-hoa-don/{id}', [\App\Http\Controllers\HoaDonController::class, 'ngayHoaDon']);
         Route::get('/delete/{id}', [\App\Http\Controllers\HoaDonController::class, 'destroy']);
+        Route::post('/in-bill/{id}', [\App\Http\Controllers\HoaDonController::class, 'StoreDoanhThu']);
     });
     Route::group(['prefix' => '/nguyen-lieu'], function() {
         Route::get('/index', [\App\Http\Controllers\NguyenLieuController::class, 'index']);
@@ -145,4 +146,7 @@ Route::group(['prefix' => '/admin'], function() {
             Route::get('/remove-cart/{id}', [\App\Http\Controllers\ChiTietHoaDonController::class, 'removeCart']);
             Route::get('/create-bill/{id}', [\App\Http\Controllers\DonHangController::class, 'store']);
 });
-
+//, 'middleware' => 'adminMiddle'
+// Route::group(['prefix' => 'laravel-filemanager'], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });

@@ -94,6 +94,10 @@ class HoaDonController extends Controller
     }
    }
 
+
+/// PHẦN HÓA ĐƠN THEO NGÀY
+
+
    //Hóa đơn từng ngày của quán Cafe
    public function page(){
     $check = Auth::guard('Admin')->user();
@@ -121,7 +125,7 @@ class HoaDonController extends Controller
         // if($HoaDon) {
             $data = HoaDon::join('chi_tiet_hoa_dons','chi_tiet_hoa_dons.hoa_don_id','hoa_dons.id')
                             ->where('chi_tiet_hoa_dons.hoa_don_id',$id)
-                            ->select('hoa_dons.*','chi_tiet_hoa_dons.*')
+                            ->select('hoa_dons.*','chi_tiet_hoa_dons.id as id_chi_tiet','chi_tiet_hoa_dons.*')
                             ->get();
             return response()->json([
                 'status'  =>  true,
@@ -152,22 +156,34 @@ class HoaDonController extends Controller
         // $request->id, $request->so_luong, $request->don_gia
         $khoHang = ChiTietHoaDon::where('id', $request->id)->first();
         // $sanPham = SanPham::where('id', $request->id)->first();
-
+        $total = 0;
+        $thuc_tra = 0;
         if($khoHang) {
-            $khoHang->so_luong = $request->so_luong;
+            // $sanPham = SanPham::find($khoHang->san_pham_id);
+            // if($sanPham)
+            // {
+                $khoHang->so_luong = $request->so_luong;
+            // }
             if($khoHang->so_luong > 0){
                 $khoHang->save();
                 $hoaDon = HoaDon::find($khoHang->hoa_don_id);
                  if($hoaDon){
-                    $sanPham = SanPham::find($khoHang->san_pham_id);
-                    if($sanPham)
-                    {
-                        $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
-                        $hoaDon->thuc_tra = $khoHang->so_luong * $giaBan;
-                        $hoaDon->tong_tien = $khoHang->so_luong * $sanPham->gia_ban;
+                    $chiTiet = ChiTietHoaDon::join('san_phams', 'chi_tiet_hoa_dons.san_pham_id', 'san_phams.id')->where('hoa_don_id', $khoHang->hoa_don_id)->where('is_cart', 0)->select('san_phams.gia_ban', 'chi_tiet_hoa_dons.*')->get();
+                    foreach ($chiTiet as $value) {
+                        $sanPham = SanPham::find($value->san_pham_id);
+                        if($sanPham){
+                            $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
+                            $total += $value->gia_ban * $value->so_luong;
+                        // dd($giaBan);
+                            $thuc_tra += $value->so_luong * $giaBan;
+                        }
+
+                    }
+                        // $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
+                        $hoaDon->tong_tien = $total;
+                        $hoaDon->thuc_tra = $thuc_tra;
                         $hoaDon->tien_giam_gia = $hoaDon->tong_tien - $hoaDon->thuc_tra;
                         $hoaDon->save();
-                    }
                     // $hoaDon->thuc_tra = $khoHang->so_luong * $khoHang->don_gia;
                     // $hoaDon->save();
                  }
@@ -178,6 +194,8 @@ class HoaDonController extends Controller
             }else{
                 return response()->json(['status' => false]);
             }
+            ///
+            // }
 
         } else {
             return response()->json(['status' => false]);
@@ -197,16 +215,57 @@ class HoaDonController extends Controller
         }
     }
     public function destroy($id){
-        $hoaDon = HoaDon::where('hoa_dons.id',$id)->first();
+        $hoaDon = ChiTietHoaDon::find($id);
+        // $total = 0;
+        // $thuc_tra = 0;
         if($hoaDon) {
-            $hoaDon->delete();
+                $hoaDon->delete();
+                // $hoaDon = HoaDon::find($hoaDon->hoa_don_id);
+                //     if($hoaDon){
+                //         $chiTiet = ChiTietHoaDon::join('san_phams', 'chi_tiet_hoa_dons.san_pham_id', 'san_phams.id')
+                //                                 ->where('hoa_don_id', $hoaDon->hoa_don_id)
+                //                                 ->where('is_cart', 0)
+                //                                 ->select('san_phams.gia_ban', 'chi_tiet_hoa_dons.*')
+                //                                 ->get();
+                //         foreach ($chiTiet as $value) {
+                //             $sanPham = SanPham::find($value->san_pham_id);
+                //             if($sanPham){
+                //                 $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
+                //                 $total += $value->gia_ban * $value->so_luong;
+                //             // dd($giaBan);
+                //                 $thuc_tra += $value->so_luong * $giaBan;
+                //             }
+
+                //         }
+                //             // $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
+                //             $hoaDon->tong_tien = $total;
+                //             $hoaDon->thuc_tra = $thuc_tra;
+                //             $hoaDon->tien_giam_gia = $hoaDon->tong_tien - $hoaDon->thuc_tra;
+                //             $hoaDon->save();
+                return response()->json([
+                    'status'  =>  true,
+                    'kho_hang' => $hoaDon,
+                ]);
+            } else {
+                return response()->json([
+                    'status'  =>  false,
+                ]);
+            }
+        }
+    // }
+    public function StoreDoanhThu($id)
+    {
+        $data = HoaDon::where('id',$id)
+                        ->where('xuat_hoa_don',0)
+                        ->get();
+        if(count($data)>0){
             return response()->json([
-                'status'  =>  true,
-                'kho_hang' => $hoaDon,
+                'status'    => true,
+                'kho_hang'  => $data,
             ]);
-        } else {
+        }else{
             return response()->json([
-                'status'  =>  false,
+                'status'    => false,
             ]);
         }
     }

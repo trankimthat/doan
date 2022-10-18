@@ -163,13 +163,17 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="position-relative form-group">
-                                <label>Ảnh Đại Diện</label>
+                            <div class="form-group">
+                                <label>Hình Ảnh</label>
                                 <div class="input-group">
-                                    <input id="anh_dai_dien" name="anh_dai_dien" class="form-control" type="text">
-                                    <input type="button" class="btn-info lfm" data-input="anh_dai_dien" data-preview="holder" value="Upload">
+                                    <input id="anh_dai_dien" class="form-control" type="text" name="filepath">
+                                    <span class="input-group-prepend">
+                                      <a data-input="anh_dai_dien" data-preview="holder" class="btn btn-primary lfm">
+                                        <i class="fa fa-picture-o"></i> Choose
+                                      </a>
+                                    </span>
                                 </div>
-                                <img id="holder" style="margin-top:15px;max-height:100px;">
+                                <div id="holder" style="margin-top:15px;max-height:100px;"></div>
                             </div>
                         </div>
                     </div>
@@ -236,8 +240,8 @@
     </div>
 @endsection
 @section('js')
-<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
 <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
 <script>
     $('.lfm').filemanager('image');
     var options = {
@@ -249,6 +253,14 @@
     // CKEDITOR.replace('mo_ta_chi_tiet', options);
     // CKEDITOR.replace('mo_ta_chi_tiet_edit', options);
 </script>
+
+{{-- <script>
+    var route_prefix = "/laravel-filemanager";
+</script>
+<script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+<script>
+    $(".lfm").filemanager('image', {prefix : route_prefix});
+</script> --}}
 
 
 <script>
@@ -470,4 +482,5 @@
         });
     });
 </script>
+
 @endsection

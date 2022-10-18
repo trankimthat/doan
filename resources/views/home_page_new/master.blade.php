@@ -14,7 +14,8 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -33,42 +34,64 @@
     @toastr_css
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
-        .dropdown-item:hover{
-         color: red;
-         background: none;
+        .dropdown-item:hover {
+            color: red;
+            background: none;
         }
-        .navbar .navbar-nav .nav-link{
+
+        .navbar .navbar-nav .nav-link {
             padding: 10px 25px;
             color: yellowgreen;
         }
-        .dropdown-item{
+
+        .dropdown-item {
             color: yellowgreen;
         }
-        .navbar-toggler{
+
+        .navbar-toggler {
             background-color: red;
         }
+
         a.home {
             cursor: pointer;
         }
+
         a#cart {
             cursor: pointer;
         }
+
         a.navbar-brand.ms-4.ms-lg-0 {
-             cursor: pointer;
+            cursor: pointer;
+        }
+
+        .card-body {
+            display: flex;
+        }
+
+        .btn-lg,
+        .btn-group-lg>.btn {
+            padding: 0.3rem 1rem;
+            font-size: 12px;
+        }
+
+        article.card-group-item {
+            width: 36%;
+            margin: auto;
         }
     </style>
 </head>
 
 <body>
     <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status"></div>
     </div>
     <!-- Spinner End -->
 
 
     <!-- Navbar Start -->
-   @include('home_page_new.share.top')
+    @include('home_page_new.share.top')
     <!-- Navbar End -->
 
 
@@ -143,21 +166,21 @@
     <script src="/home_assets/app_assets/js/main.js"></script>
     @yield('js')
     <script>
-    $(document).ready(function() {
+        $(document).ready(function() {
 
 
-        $('#cart').click(function(){
+            $('#cart').click(function() {
                 var url = window.location.pathname;
                 var id = url.substr(11);
                 window.location.href = "/user/cart/" + id;
             });
-        $('.home').click(function(){
-            var url = window.location.pathname;
-            var id = url.substr(11);
-            window.location.href = "/home-page/" + id;
-        });
+            $('.home').click(function() {
+                var url = window.location.pathname;
+                var id = url.substr(11);
+                window.location.href = "/home-page/" + id;
+            });
 
-    });
+        });
     </script>
 </body>
 

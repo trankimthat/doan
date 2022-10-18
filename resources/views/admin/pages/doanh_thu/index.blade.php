@@ -99,7 +99,7 @@
         </div>
         <div class="modal-body">
             Bạn có chắc chắn muốn xóa? Điều này không thể hoàn tác.
-            <input type="text" class="form-control" placeholder="Nhập vào id cần xóa" id="idDeleteDanhMuc" hidden>
+            <input type="text" class="form-control" placeholder="Nhập vào id cần xóa" id="idDeleteSanPham" hidden>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -163,6 +163,7 @@ $(document).ready(function() {
                         var tongTienGiam = 0;
                         var tongTienTra = 0;
                         var ma_ban = '';
+                        $("#id_ban_thanh_toan").val(id);
                         $.each(res.dataNe, function(key, value) {
                             content_table += '<tr>';
                             content_table += '<th class="text-center" scope="row">' + (key + 1) +'</th>';
@@ -174,7 +175,7 @@ $(document).ready(function() {
                             content_table += '<td class="total" data-id="'+value.id+'"> ' + value.so_luong * value.don_gia + ' </td>';
                             content_table += '</td>';
                             content_table += '<td class="text-center">';
-                            content_table += '<button class="btn btn-danger delete mr-1" data-iddelete="'+ value.id +'" data-toggle="modal" data-target="#deleteModal">Delete</button>';
+                            content_table += '<button class="btn btn-danger delete mr-1" data-iddelete="'+ value.id_chi_tiet +'" data-toggle="modal" data-target="#deleteModal">Delete</button>';
                             content_table += '</td>';
                             content_table += '</tr>';
                             tongtienthuc = value.tong_tien;
@@ -313,24 +314,40 @@ $(document).ready(function() {
     });
     $('body').on('click','.delete',function(){
             var getId = $(this).data('iddelete');
-            $("#idDeleteDanhMuc").val(getId);
+            $("#idDeleteSanPham").val(getId);
     });
 
     $("#accpectDelete").click(function(){
-        var id = $("#idDeleteDanhMuc").val();
+        var id = $("#idDeleteSanPham").val();
         $.ajax({
             url     :   '/admin/doanh-thu/delete/' + id,
             type    :   'get',
             success :   function(res) {
                 if(res.status) {
-                    toastr.success('Đã xóa danh mục thành công!');
-                    loadTable(res.kho_hang.id);
+                    toastr.success('Đã xóa sản phẩm thành công!');
+                    loadtableRight(res.kho_hang.hoa_don_id);
                 } else {
-                    toastr.error('Danh mục không tồn tại!');
+                    toastr.error('sản phẩm không tồn tại!');
                 }
             },
         });
     });
+    $('body').on('click','#inBill',function(){
+        var id = $("#id_ban_thanh_toan").val();
+        // console.log(id);
+            $.ajax({
+                url     :'/admin/doanh-thu/in-bill/'+ id,
+                type    : 'post',
+                success : function(res) {
+                    if(res.status == 1){
+                        toastr.success("Đã in bill thành công!");
+                        loadTableRight();
+                    }else{
+                        toastr.warning("Bill Rỗng !")
+                    }
+                    },
+                });
+    })
 });
 </script>
 @endsection
