@@ -24,9 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $menuCha = DanhMucSanPham::
-                                 where('is_open', 1)
-                                 ->get();
+        $menuCha = DanhMucSanPham::where('is_open', 1)->get();
 
 
 

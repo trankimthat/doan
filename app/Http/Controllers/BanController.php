@@ -29,7 +29,9 @@ class BanController extends Controller
 
     public function store(BanRequest $request)
     {
-        Ban::create([
+        $check = Auth::guard('Admin')->user();
+            if($check){
+            Ban::create([
             'ma_ban'            =>  $request->ma_ban,
             'is_open'           =>  $request->is_open,
         ]);
@@ -37,6 +39,10 @@ class BanController extends Controller
         return response()->json([
             'trangThai'         =>  true,
         ]);
+        }else{
+            toastr()->error('mời bạn đăng nhập');
+            return view('admin.login');
+        }
     }
     public function getData()
     {
@@ -63,6 +69,8 @@ class BanController extends Controller
     }
     public function destroy($id)
     {
+        $check = Auth::guard('Admin')->user();
+        if($check){
         $ban = Ban::find($id);
         if($ban) {
             $ban->delete();
@@ -74,6 +82,10 @@ class BanController extends Controller
                 'status'  =>  false,
             ]);
         }
+    }else{
+        toastr()->error('Mời bạn đăng nhập');
+        return view('admin.login');
+    }
     }
 
 }

@@ -51,6 +51,7 @@ class HoaDonController extends Controller
     }
     public function ban($id){
         $ban = Ban::find($id);
+        // dd($ban);
         if($ban) {
             return response()->json([
                 'status'  =>  true,
@@ -129,7 +130,7 @@ class HoaDonController extends Controller
                             ->get();
             return response()->json([
                 'status'  =>  true,
-                'dataNe'    =>  $data,
+                'dataNe'    =>  $data,                                                                                                                                     
             ]);
         // } else {
         //     return response()->json([
@@ -215,44 +216,45 @@ class HoaDonController extends Controller
         }
     }
     public function destroy($id){
-        $hoaDon = ChiTietHoaDon::find($id);
-        // $total = 0;
-        // $thuc_tra = 0;
-        if($hoaDon) {
-                $hoaDon->delete();
-                // $hoaDon = HoaDon::find($hoaDon->hoa_don_id);
-                //     if($hoaDon){
-                //         $chiTiet = ChiTietHoaDon::join('san_phams', 'chi_tiet_hoa_dons.san_pham_id', 'san_phams.id')
-                //                                 ->where('hoa_don_id', $hoaDon->hoa_don_id)
-                //                                 ->where('is_cart', 0)
-                //                                 ->select('san_phams.gia_ban', 'chi_tiet_hoa_dons.*')
-                //                                 ->get();
-                //         foreach ($chiTiet as $value) {
-                //             $sanPham = SanPham::find($value->san_pham_id);
-                //             if($sanPham){
-                //                 $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
-                //                 $total += $value->gia_ban * $value->so_luong;
-                //             // dd($giaBan);
-                //                 $thuc_tra += $value->so_luong * $giaBan;
-                //             }
+        $ChiTiethoaDon = ChiTietHoaDon::find($id);
+        $total = 0;
+        $thuc_tra = 0;
+        if($ChiTiethoaDon) {
+                $ChiTiethoaDon->delete();
+                // $ChiTiethoaDon->save();
+                $hoaDon = HoaDon::find($ChiTiethoaDon->hoa_don_id);
+                    if($hoaDon){
+                        $chiTiet = ChiTietHoaDon::join('san_phams', 'chi_tiet_hoa_dons.san_pham_id', 'san_phams.id')
+                                                ->where('hoa_don_id',$ChiTiethoaDon->hoa_don_id)
+                                                ->where('is_cart', 0)
+                                                ->select('san_phams.gia_ban', 'chi_tiet_hoa_dons.*')
+                                                ->get();
+                        foreach ($chiTiet as $value) {
+                            $sanPham = SanPham::find($value->san_pham_id);
+                            if($sanPham){
+                                $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
+                                $total += $value->gia_ban * $value->so_luong;
+                            // dd($giaBan);
+                                $thuc_tra += $value->so_luong * $giaBan;
+                            }
 
-                //         }
-                //             // $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
-                //             $hoaDon->tong_tien = $total;
-                //             $hoaDon->thuc_tra = $thuc_tra;
-                //             $hoaDon->tien_giam_gia = $hoaDon->tong_tien - $hoaDon->thuc_tra;
-                //             $hoaDon->save();
+                        }
+                            // $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
+                            $hoaDon->tong_tien = $total;
+                            $hoaDon->thuc_tra = $thuc_tra;
+                            $hoaDon->tien_giam_gia = $hoaDon->tong_tien - $hoaDon->thuc_tra;
+                            $hoaDon->save();
                 return response()->json([
                     'status'  =>  true,
-                    'kho_hang' => $hoaDon,
+                    'hang' => $ChiTiethoaDon,
                 ]);
-            } else {
-                return response()->json([
-                    'status'  =>  false,
-                ]);
+            }else{
+                return response()->json(['status' => false]);
             }
+        }else {
+            return response()->json(['status' => false]);
         }
-    // }
+    }
     public function StoreDoanhThu($id)
     {
         $data = HoaDon::where('id',$id)

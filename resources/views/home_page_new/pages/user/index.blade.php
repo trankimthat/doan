@@ -10,14 +10,7 @@
                 </div>
                 <div class="col-lg-4">
 
-                    {{-- <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                        <fieldset class="form-group position-relative">
 
-                            <input id="searchSanPham" name="search_sp" type="text" class="form-control form-control mb-1"
-                                placeholder="nhập tên sản phẩm">
-
-                        </fieldset>
-                    </div> --}}
                     {{-- </form> --}}
                 </div>
                 <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s"
@@ -36,7 +29,16 @@
                 @foreach ($menuCha as $key => $value)
                     <div id="tab-{{ $value->id }}" class="tab-pane fade {{ $key == 0 ? 'active show' : '' }}">
                         <div class="row g-4">
-                            <form name="frmTimKiem" id="frmTimKiem" method="GET" action="">
+                            {{-- <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                                <fieldset class="form-group position-relative">
+
+                                    <input id="searchSanPham" name="search_sp" type="text" class="form-control form-control mb-1"
+                                        placeholder="nhập tên sản phẩm">
+
+                                </fieldset>
+                            </div> --}}
+                            {{-- <form name="frmTimKiem" id="frmTimKiem" method="GET" action=""> --}}
+                            {{-- <div>
                                 <article class="card-group-item">
                                     <div class="filter-content">
                                         <div class="card-body">
@@ -48,13 +50,15 @@
                                             <input  class="form-control" type="text" placeholder="Tìm kiếm"
                                                 aria-label="Search" name="keyword_tensanpham" value="">
                                                 <button class="btn btn-primary btn-lg" name="btnTimKiem" id="btnTimKiem">Tìm</button>
-                                        </div> <!-- card-body.// -->
+                                        </div>
                                     </div>
                                 </article>
-                                @foreach ($allSanPham as $key_sp => $value_sp)
-                                    @if (in_array($value_sp->id_danh_muc, explode(',', $value->tmp)))
-                                        {{-- <div class="row" id="tablePage"> --}}
-                                        <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            </div> --}}
+                            @foreach ($allSanPham as $key_sp => $value_sp)
+                                @if (in_array($value_sp->id_danh_muc, explode(',', $value->tmp)))
+                                    {{-- <div class="row" id="tablePage"> --}}
+
+                                    <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                             <div class="product-item">
                                                 <div class="position-relative bg-light overflow-hidden">
                                                     <img class="img-fluid w-100" src="{{ $value_sp->anh_dai_dien }}"
@@ -85,10 +89,31 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- </div> --}}
-                                    @endif
-                                @endforeach
-                            </form>
+
+                                    {{-- </div> --}}
+                                {{-- <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                    <div class="product-item">
+                                    <div class="card-group">
+                                        <div class="card">
+                                            <img class="card-img-top img-fluid w-100" src="{{ $value_sp->anh_dai_dien }}"
+                                                alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ $value_sp->ten_san_pham }}</h5>
+                                                @if ($value_sp->gia_khuyen_mai == 0)
+                                                    <span class="text-primary me-1">{{ $value_sp->gia_ban }}</span>
+                                                @else
+                                                    <span class="text-primary me-1">{{ $value_sp->gia_khuyen_mai }}</span>
+                                                    <span
+                                                        class="text-body text-decoration-line-through">{{ $value_sp->gia_ban }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div> --}}
+                                @endif
+                            @endforeach
+                            {{-- </form> --}}
 
 
                         </div>
@@ -262,6 +287,7 @@
                     }
                 });
             });
+
         });
     </script>
 @endsection

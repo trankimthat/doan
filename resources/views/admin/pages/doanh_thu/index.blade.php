@@ -109,6 +109,10 @@
     </div>
 </div>
 @section('js')
+<script>"https://code.jquery.com/jquery-3.5.1.js"</script>
+<script>"https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"</script>
+<script>"https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"</script>
+<script>"https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"</script>
 <script>
 $(document).ready(function() {
 
@@ -325,7 +329,7 @@ $(document).ready(function() {
             success :   function(res) {
                 if(res.status) {
                     toastr.success('Đã xóa sản phẩm thành công!');
-                    loadtableRight(res.kho_hang.hoa_don_id);
+                    loadtableRight(res.hang.hoa_don_id);
                 } else {
                     toastr.error('sản phẩm không tồn tại!');
                 }
@@ -342,8 +346,9 @@ $(document).ready(function() {
                     if(res.status == 1){
                         toastr.success("Đã in bill thành công!");
                         loadTableRight();
+                        window.print();
                     }else{
-                        toastr.warning("Bill Rỗng !")
+                        toastr.warning("lỗi nha!!!");
                     }
                     },
                 });

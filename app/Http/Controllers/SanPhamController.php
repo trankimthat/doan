@@ -100,9 +100,9 @@ class SanPhamController extends Controller
         $data = SanPham::join('danh_muc_san_phams','danh_muc_san_phams.id','san_phams.id_danh_muc')
                         ->where('danh_muc_san_phams'.$request->id)
                         ->where('ten_san_pham', 'like', '%' . $request->tenSanPham .'%')
-                        ->select('san_phams.*','danh_muc_san_phams.*')
+                        // ->select('san_phams.*','danh_muc_san_phams.*')
                         ->get();
-
+        
         return response()->json([
             'dataProduct' => $data,
         ]);

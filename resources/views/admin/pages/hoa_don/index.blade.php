@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="cart float-md-right text-md-right">
-                            <input hidden  id="id_ban_thanh_toan">
+                            <input hidden  id="id_ban_thanh_toan" >
                             <button id="inBill" class="btn btn-danger">INVOICE</button>
                         </div>
                     </div>
@@ -68,6 +68,11 @@
 </div>
 @endsection
 @section('js')
+{{-- <script>"jquery.min.js"</script> --}}
+{{-- <script>"https://code.jquery.com/jquery-3.5.1.js"</script>
+<script>"https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"</script>
+<script>"https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"</script>
+<script>"https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"</script> --}}
 <script>
     $(window).on('load',  function(){
       if (feather) {
@@ -155,7 +160,7 @@
                         tongTienGiam = value.tien_giam_gia;
                         tongTienThucTra =  value.thuc_tra;
                         ma_ban = value.ma_ban;
-                        ten_nhan_vien = value.ho_va_ten
+                        ten_nhan_vien = value.ho_va_ten;
                         });
                         $("#tableBanRight tbody").html(content_table);
                         $("#tongTien").text(formatNumber(tongTien));
@@ -216,6 +221,13 @@
             $('body').on('click','#inBill',function(){
                 var id = $("#id_ban_thanh_toan").val();
                 // console.log(id);
+                // var printme = document.getElemenById('tableBanRight')
+                // var wme = window.open("","","width=900,height=700");
+                // wme.document.write(printme.outerHTML);
+                // wme.document.close();
+                // wme.focus();
+                // wme.print();
+                // wme.close();
                 $.ajax({
                     url     :'/admin/hoa-don/in-bill/'+ id,
                     type    : 'post',
@@ -223,12 +235,20 @@
                         if(res.status == 1){
                             toastr.success("Đã in bill thành công!");
                             loadTableRight();
+                            window.print();
                         }else{
                             toastr.warning("Bill Rỗng !")
                         }
                     },
                 });
             })
+
+            // $('#example').DataTable( {
+            //     dom: 'Bfrtip',
+            //     buttons: [
+            //         'print'
+            //     ]
+            // } );
         })
   </script>
 @endsection
