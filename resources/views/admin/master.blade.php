@@ -12,56 +12,81 @@ License: You must have a valid license purchased only from themeforest(the above
 
 -->
 <html class="loading" lang="en" data-textdirection="ltr">
-  <!-- BEGIN: Head-->
-  <head>
+<!-- BEGIN: Head-->
+
+<head>
     @include('admin.shares.head')
     <style>
-         <style>
-        button.doiTrangThai.btn.btn-primary {
-        margin-left: 13px;
+        <style>button.doiTrangThai.btn.btn-primary {
+            margin-left: 13px;
         }
+
         button.doiTrangThai.btn.btn-danger {
-        margin-left: 6px;
+            margin-left: 6px;
         }
+
         .row.col-md-12 {
-         margin-left: 1px;
+            margin-left: 1px;
         }
+
         .row.col-md-3 {
-         margin-top: 30px;
+            margin-top: 30px;
+        }
+
+        tr.odd.selected,
+        tr.even.selected {
+            background: antiquewhite;
+        }
+
+        .select2-container {
+            width: 50% !important;
+        }
+
+        .select2-container--classic.select2-container--open,
+        .select2-container--default.select2-container--open {
+            background: aliceblue;
+        }
+
+        select#select-name.select2-hidden-accessible {
+            display: contents;
         }
     </style>
-  </head>
-  <!-- END: Head-->
+    @method('css')
+</head>
+<!-- END: Head-->
 
-  <!-- BEGIN: Body-->
-  <body class="horizontal-layout horizontal-menu  navbar-floating footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="">
+<!-- BEGIN: Body-->
+
+<body class="horizontal-layout horizontal-menu  navbar-floating footer-static  " data-open="hover"
+    data-menu="horizontal-menu" data-col="">
 
     <!-- BEGIN: Header-->
-   @include('admin.shares.top')
+    @include('admin.shares.top')
     <!-- END: Header-->
 
 
     <!-- BEGIN: Main Menu-->
-   @include('admin.shares.menu')
+    @include('admin.shares.menu')
     <!-- END: Main Menu-->
 
     <!-- BEGIN: Content-->
     <div class="app-content content ">
-      <div class="content-overlay"></div>
-      <div class="header-navbar-shadow"></div>
-      <div class="content-wrapper container-xxl p-0">
-        <div class="content-header row" >
-        </div>
-        <div class="content-body"><!-- Dashboard Ecommerce Starts -->
-<section id="dashboard-ecommerce">
-
-
-    <div class="content-wrapper">
-        <div class="content-header row" >
-            <div class="content-header-left col-md-12 mb-2">
-                @yield('title')
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-header row">
             </div>
-            {{-- <div class="content-header-right col-md-6 col-12">
+            <div class="content-body">
+                <!-- Dashboard Ecommerce Starts -->
+                <section id="dashboard-ecommerce">
+
+
+                    <div class="content-wrapper">
+                        <div class="content-header row">
+                            <div class="content-header-left col-md-12 mb-2">
+                                @yield('title')
+                            </div>
+                            {{-- <div class="content-header-right col-md-6 col-12">
                 <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
                     <div class="btn-group" role="group">
                         <button class="btn btn-outline-primary dropdown-toggle dropdown-menu-right" id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings icon-left"></i> Settings</button>
@@ -69,38 +94,38 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div><a class="btn btn-outline-primary" href="full-calender-basic.html"><i class="feather icon-mail"></i></a><a class="btn btn-outline-primary" href="timeline-center.html"><i class="feather icon-pie-chart"></i></a>
                 </div>
             </div> --}}
-        </div>
-        <div class="content-body">
-            @yield('content')
-        </div>
-    </div>
-</section>
-<!-- Dashboard Ecommerce ends -->
+                        </div>
+                        <div class="content-body">
+                            @yield('content')
+                        </div>
+                    </div>
+                </section>
+                <!-- Dashboard Ecommerce ends -->
 
+            </div>
         </div>
-      </div>
     </div>
     <!-- END: Content-->
 
 
     <!-- BEGIN: Customizer-->
 
-  <!-- Customizer header -->
+    <!-- Customizer header -->
 
 
-  <!-- Styling & Text Direction -->
+    <!-- Styling & Text Direction -->
 
 
-  <!-- Menu -->
+    <!-- Menu -->
 
 
-  <!-- Layout Width -->
+    <!-- Layout Width -->
 
 
-  <!-- Navbar -->
+    <!-- Navbar -->
 
 
-  <!-- Footer -->
+    <!-- Footer -->
 
     <!-- End: Customizer-->
 
@@ -116,13 +141,21 @@ License: You must have a valid license purchased only from themeforest(the above
     @include('admin.shares.bot')
     @yield('js')
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ asset('js/vendor.min.js') }}"></script>
+    <script src="{{ asset('js/app.min.js') }}"></script>
     <script>
-      $(window).on('load',  function(){
-        if (feather) {
-          feather.replace({ width: 14, height: 14 });
-        }
-      })
+        $(window).on('load', function() {
+            if (feather) {
+                feather.replace({
+                    width: 14,
+                    height: 14
+                });
+            }
+        })
     </script>
-  </body>
-  <!-- END: Body-->
+    @stack('js')
+</body>
+<!-- END: Body-->
+
 </html>

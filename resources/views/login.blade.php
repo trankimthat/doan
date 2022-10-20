@@ -14,25 +14,31 @@
             background-size: cover;
             background-image: url(https://allimages.sgp1.digitaloceanspaces.com/photographercomvn/2020/12/1608673166_Top-50-hinh-anh-ly-Cafe-buoi-sang-dep-tuyet.jpg)
         }
+
         .bg {
-            background: rgba(0,0,0,0);
+            background: rgba(0, 0, 0, 0);
             border: none;
         }
-        .button-1{
+
+        .button-1 {
             padding: 0px 15px;
         }
-        .button-2{
+
+        .button-2 {
             padding: 0px 25px;
         }
-        .mx-1.mx-md-4{
+
+        .mx-1.mx-md-4 {
             margin-top: 30px;
             text-align: center;
         }
+
         #login-2 {
-        padding: 15px 30px;
+            padding: 15px 30px;
         }
+
         #login-1 {
-        padding: 15px 22px;
+            padding: 15px 22px;
         }
     </style>
 </head>
